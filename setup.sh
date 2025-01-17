@@ -14,13 +14,21 @@ fi
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 echo "Symlink created for tmux."
 
-# tmux symlink
+# zsh symlink
 if [ -e ~/.zshrc ]; then
-  echo "Backing up existing tmux.conf..."
+  echo "Backing up existing zshrc..."
   mv ~/.zshrc ~/.zshrc.backup
 fi
 ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 echo "Symlink created for zsh."
+
+# zsh symlink
+if [ -e ~/.fonts ]; then
+  echo "Backing up existing fonts..."
+  mv ~/.fonts ~/.fonts.backup
+fi
+ln -s ~/.dotfiles/fonts/.fonts/ ~/.fonts
+echo "Symlink created for fonts."
 
 
 echo "All done!"

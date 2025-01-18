@@ -8,6 +8,7 @@ source ~/.zsh-custom/env_vars.zsh
 alias nv="nvim"
 alias tmks="tmux kill-session"
 alias nvconf="cd ~/.config/nvim/"
+alias aliasconf="nvim ~/.zsh-custom/aliases.zsh"
 alias zsconf="nvim ~/.zshrc"
 alias dtconf="cd ~/.dotfiles/"
 
@@ -132,5 +133,4 @@ source $ZSH/oh-my-zsh.sh
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 

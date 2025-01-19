@@ -102,6 +102,11 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+
+# Bind new key to accept autosuggestion
+bindkey '^@' autosuggest-accept
+
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

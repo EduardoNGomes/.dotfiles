@@ -11,6 +11,7 @@ alias nvconf="cd ~/.config/nvim/"
 alias aliasconf="nvim ~/.zsh-custom/aliases.zsh"
 alias zsconf="nvim ~/.zshrc"
 alias dtconf="cd ~/.dotfiles/"
+alias cl="clear"
 
 
 # If you come from bash you might have to change your $PATH.

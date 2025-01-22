@@ -42,5 +42,16 @@ fi
 ln -s ~/.dotfiles/fonts/.fonts/ ~/.fonts
 echo "Symlink created for fonts."
 
+if [ -L ~/.myclirc ]; then
+  echo "Removing existing Neovim symlink..."
+  rm ~/.myclirc
+elif [ -e ~/.myclirc ]; then
+  echo "Backing up existing nvim config..."
+  mv ~/.myclirc ~/.myclirc.backup
+fi
+ln -s ~/.dotfiles/mycli/.myclirc ~/.myclirc
+echo "Symlink created for Neovim."
+
+
 echo "All done!"
 

@@ -10,7 +10,7 @@ args = ["new-session"]
 program = "/usr/bin/tmux"
 
 [window]
-padding.x = 25
+padding.x = 0
 padding.y = 10
 dynamic_padding = true
 startup_mode = "Maximized"

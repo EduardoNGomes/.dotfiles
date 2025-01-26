@@ -70,15 +70,15 @@ ln -s ~/.dotfiles/alacritty/ ~/.config/alacritty
 echo "Symlink created for Alacritty."
 
 
-#oh-my-zsh themes symlink
-if [ -L ~/.oh-my-zsh/themes ]; then
-  echo "Removing existing oh-my-zsh themes symlink..."
-  rm ~/.oh-my-zsh/themes
-elif [ -e ~/.oh-my-zsh/themes ]; then
+#oh-my-zsh symlink
+if [ -L ~/.oh-my-zsh/ ]; then
+  echo "Removing existing oh-my-zsh symlink..."
+  rm ~/.oh-my-zsh
+elif [ -e ~/.oh-my-zsh/ ]; then
   echo "Backing up existing oh-my-zsh themes config..."
-  mv ~/.oh-my-zsh/themes ~/.oh-my-zsh/themes-backup
+  mv ~/.oh-my-zsh/ ~/.oh-my-zsh-backup
 fi
-ln -s ~/.dotfiles/oh-my-zsh/themes ~/.oh-my-zsh/themes
+ln -s ~/.dotfiles/oh-my-zsh ~/.oh-my-zsh
 echo "Symlink created for oh-my-zsh/themes."
 
 

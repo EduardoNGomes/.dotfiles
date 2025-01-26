@@ -1,0 +1,24 @@
+general.import = [
+   "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+[terminal.shell]
+args = ["new-session"]
+program = "/usr/bin/tmux"
+
+[window]
+padding.x = 5
+padding.y = 5
+dynamic_padding = true
+startup_mode = "Maximized"
+decorations = "none"
+opacity= 0.95
+
+[colors]
+primary.background = "#000000"
+
+[font]
+normal.family = "JetBrainsMono Nerd Font"
+size = 12.5
+
+[terminal]

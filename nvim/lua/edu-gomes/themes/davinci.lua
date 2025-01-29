@@ -84,7 +84,9 @@ local function apply_highlights()
 	highlight(0, "@punctuation.brackets", { fg = colors.brackets })
 	highlight(0, "@parameter", { fg = colors.arguments })
 	highlight(0, "@operator", { fg = colors.operator_signals })
-	highlight(0, "@escape", { fg = colors.escapes })
+	highlight(0, "@string.escape", { fg = colors.escapes })
+	highlight(0, "@string.special", { fg = colors.escapes })
+	highlight(0, "@string.special.symbol", { fg = colors.escapes })
 end
 
 function M.setup()

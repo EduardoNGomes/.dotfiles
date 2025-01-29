@@ -12,6 +12,7 @@ alias aliasconf="nvim ~/.zsh-custom/aliases.zsh"
 alias zsconf="nvim ~/.zshrc"
 alias dtconf="cd ~/.dotfiles/"
 alias cl="clear"
+alias dw="cd ~/Downloads"
 
 
 # If you come from bash you might have to change your $PATH.

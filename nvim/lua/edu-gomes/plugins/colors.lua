@@ -1,30 +1,54 @@
+local function set_transparent_bg()
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
 function ChangeTheme(theme)
-	theme = theme or "tokyonight-night"
+	theme = theme or "catppuccin"
 
-	vim.cmd.colorscheme(theme)
+	if theme == "davinci" then
+		require("edu-gomes.themes.davinci").setup()
+	else
+		vim.cmd.colorscheme(theme)
+	end
 
-	--	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	--	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	set_transparent_bg()
 end
 
 vim.keymap.set("n", "<Leader>t1", function()
-	ChangeTheme("tokyonight-night")
-end, { desc = "Switch to Tokyo Night" })
+	ChangeTheme("aura-dark")
+end, { desc = "Switch to aura-dark" })
+
 vim.keymap.set("n", "<Leader>t2", function()
 	ChangeTheme("catppuccin")
 end, { desc = "Switch to Catppuccin" })
+
 vim.keymap.set("n", "<Leader>t3", function()
-	ChangeTheme("tokyodark")
-end, { desc = "Switch to Tokyodark" })
-vim.keymap.set("n", "<Leader>t4", function()
 	ChangeTheme("onedark")
 end, { desc = "Switch to Onedark" })
 
+vim.keymap.set("n", "<Leader>t4", function()
+	ChangeTheme("davinci")
+end, { desc = "Switch to Davinci" })
+
+vim.keymap.set("n", "<Leader>t5", function()
+	ChangeTheme("tokyonight-night")
+end, { desc = "Switch to Tokyo Night" })
+
 return {
+	{
+		"baliestri/aura-theme",
+		priority = 50,
+		lazy = false,
+		config = function(plugin)
+			vim.opt.rtp:append(plugin.dir .. "/packages/neovim")
+			vim.cmd([[colorscheme aura-dark]])
+			set_transparent_bg()
+		end,
+	},
 	-- TokyoNight theme setup
 	{
 		"folke/tokyonight.nvim",
-		priority = 1000,
 		init = function()
 			vim.cmd.colorscheme("tokyonight-night")
 			vim.g.tokyonight_transparent = true
@@ -34,37 +58,26 @@ return {
 		config = function()
 			require("tokyonight").setup({
 				transparent = true,
+				styles = {
+					sidebars = "transparent",
+					floats = "transparent",
+				},
 			})
-			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 		end,
 	},
-
-	-- Tokyodark theme setup
+	-- Onedarkpro theme
 	{
-		"tiagovla/tokyodark.nvim",
-		priority = 1000,
-		opts = {
-			transparent_background = true,
-			gamma = 1.00,
-			styles = {
-				comments = { italic = true },
-				keywords = { italic = true },
-				identifiers = { italic = true },
-				functions = {},
-				variables = {},
-			},
-			custom_highlights = function(highlights, palette)
-				return {}
-			end,
-			custom_palette = function(palette)
-				return {}
-			end,
-			terminal_colors = true,
-		},
-		config = function(_, opts)
-			require("tokyodark").setup(opts)
-			vim.cmd("colorscheme tokyodark")
+		"olimorris/onedarkpro.nvim",
+		name = "onedarkpro",
+		priority = 50,
+		config = function()
+			require("onedarkpro").setup({
+				options = {
+					transparency = true, -- Enable transparent background
+				},
+			})
+			ChangeTheme("onedark")
+			set_transparent_bg()
 		end,
 	},
 
@@ -79,21 +92,6 @@ return {
 				transparent_background = true,
 			})
 			ChangeTheme("catppuccin")
-		end,
-	},
-
-	-- Onedarkpro theme
-	{
-		"olimorris/onedarkpro.nvim",
-		priority = 1000, -- Ensure it loads first
-		name = "onedarkpro",
-		config = function()
-			require("onedarkpro").setup({
-				options = {
-					transparency = true, -- Enable transparent background
-				},
-			})
-			ChangeTheme("onedark")
 		end,
 	},
 }

@@ -11,7 +11,7 @@ program = "/usr/bin/tmux"
 
 [window]
 padding.x = 0
-padding.y = 10
+padding.y = 0
 dynamic_padding = true
 startup_mode = "Maximized"
 decorations = "none"

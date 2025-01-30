@@ -13,6 +13,7 @@ alias zsconf="nvim ~/.zshrc"
 alias dtconf="cd ~/.dotfiles/"
 alias cl="clear"
 alias dw="cd ~/Downloads"
+alias clb="git branch --merged main | grep -v "main" | xargs git branch -D"
 
 
 # If you come from bash you might have to change your $PATH.

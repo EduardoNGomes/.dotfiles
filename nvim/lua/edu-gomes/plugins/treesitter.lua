@@ -57,16 +57,6 @@ return {
 				vim.api.nvim_set_hl(0, "@string.escape.go", { fg = custom_colors.escape })
 			end,
 		})
-
-		vim.api.nvim_create_autocmd("FileType", {
-			pattern = "go",
-			callback = function()
-				-- Custom Treesitter Go highlights for format specifiers
-				vim.api.nvim_set_hl(0, "@text.format", { fg = "#CE80D9" })
-				vim.api.nvim_set_hl(0, "@string.escape.go", { fg = "#FFB86C", italic = true })
-			end,
-		})
-
 		-- Enable folding
 		vim.o.foldmethod = "expr"
 		vim.o.foldexpr = "nvim_treesitter#foldexpr()"

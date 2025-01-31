@@ -1,5 +1,6 @@
-PROMPT="%F{#47E4AE}󰌪%f "
-PROMPT+="%F{#47E4AE}%c%f"
+PROMPT="%B%F{#47E4AE}󰌪%f%b "
+PROMPT+="%B%F{#47E4AE}%c%f%b"
+
 PROMPT+=' $(git_prompt_info)'
 PROMPT+="
 %(?:%F{#47E4AE}%B%1{»%}%b :%F{red}%B%1{»%}%b )%f"

@@ -1,4 +1,4 @@
-PROMPT="%F{#47E4AE}%f "
+PROMPT="%F{#47E4AE}󰌪%f "
 PROMPT+="%F{#47E4AE}%c%f"
 PROMPT+=' $(git_prompt_info)'
 PROMPT+="

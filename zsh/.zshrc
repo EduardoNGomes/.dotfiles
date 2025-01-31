@@ -38,8 +38,7 @@ precmd_functions+=(update_terminal_title)
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="spaceship"
-ZSH_THEME="frost"
+ZSH_THEME="emerald"
 
 
 

@@ -10,10 +10,14 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
 ZSH_THEME_GIT_PROMPT_DIRTY="%F{#309BD6}) %F{yellow}%1{✗%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%F{#309BD6})"
 
+
 function precmd() {
-    if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
-        NEW_LINE_BEFORE_PROMPT=1
-    elif [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
-        echo ""
+    local last_command=$(fc -ln -1 | xargs echo)
+    if [[ "$last_command" != "cl" && "$last_command" != "clear" ]]; then
+        if [ -z "$NEW_LINE_BEFORE_PROMPT" ]; then
+            NEW_LINE_BEFORE_PROMPT=1
+        elif [ "$NEW_LINE_BEFORE_PROMPT" -eq 1 ]; then
+            echo ""
+        fi
     fi
 }

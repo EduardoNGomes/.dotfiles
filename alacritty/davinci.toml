@@ -1,0 +1,58 @@
+
+# Alacritty Theme: Davinci
+# Based on the Davinci VSCode theme by Gabriel Batista
+
+[colors]
+  # Default colors
+  [colors.primary]
+  background = "#191A20"  # Background color
+  foreground = "#9D9AB1"  # Foreground (text) color
+  dim_foreground = "#7E8392"  # Dimmed text color (e.g., comments)
+  bright_foreground = "#F4AFD2"  # Bright text color (e.g., cursor line)
+
+  # Cursor colors
+  [colors.cursor]
+  text = "#191A20"  # Cursor text color (matches background)
+  cursor = "#F4AFD2"  # Cursor color
+
+  # Selection colors
+  [colors.selection]
+  text = "#FFFFFF"  # Selected text color
+  background = "#2F313C"  # Selection background color
+
+  # Normal ANSI colors
+  [colors.normal]
+  black = "#000000"  # Black
+  red = "#F65454"  # Red
+  green = "#13FBA7"  # Green
+  yellow = "#FFEB81"  # Yellow
+  blue = "#73F9F1"  # Blue
+  magenta = "#C678DD"  # Magenta
+  cyan = "#21d3ff"  # Cyan
+  white = "#FFFFFF"  # White
+
+  # Bright ANSI colors
+  [colors.bright]
+  black = "#666666"  # Bright Black (Gray)
+  red = "#F65454"  # Bright Red
+  green = "#13FBA7"  # Bright Green
+  yellow = "#FFEB81"  # Bright Yellow
+  blue = "#73F9F1"  # Bright Blue
+  magenta = "#C678DD"  # Bright Magenta
+  cyan = "#21d3ff"  # Bright Cyan
+  white = "#FFFFFF"  # Bright White
+
+  # Dimmed ANSI colors
+  [colors.dim]
+  black = "#000000"  # Dim Black
+  red = "#F65454"  # Dim Red
+  green = "#13FBA7"  # Dim Green
+  yellow = "#FFEB81"  # Dim Yellow
+  blue = "#73F9F1"  # Dim Blue
+  magenta = "#C678DD"  # Dim Magenta
+  cyan = "#21d3ff"  # Dim Cyan
+  white = "#FFFFFF"  # Dim White
+
+  # Indexed colors (optional, for advanced customization)
+  [colors.indexed_colors]
+  # This section can remain empty or you can add indexed colors if desired

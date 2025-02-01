@@ -4,6 +4,12 @@
 echo "Updating packages..."
 sudo apt update && sudo apt upgrade -y
 
+# Install alternative key bindings for switching workspaces
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Alt>h']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Alt>l']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-up "['<Alt>k']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-down "['<Alt>j']"
+
 # Function to check if the program is installed
 check_installed() {
   if command -v "$1" >/dev/null 2>&1; then

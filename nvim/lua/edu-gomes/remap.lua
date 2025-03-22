@@ -3,14 +3,23 @@ vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+local opts = { noremap = true, silent = true }
 -- Disable system clipboard integration for d and c commands
-vim.api.nvim_set_keymap("n", "d", '"_d', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "c", '"_c', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "d", '"_d', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "c", '"_c', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "d", '"_d', opts)
+vim.api.nvim_set_keymap("n", "c", '"_c', opts)
+vim.api.nvim_set_keymap("v", "d", '"_d', opts)
+vim.api.nvim_set_keymap("v", "c", '"_c', opts)
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+
+-- Move line up and down in normal mode
+vim.api.nvim_set_keymap("n", "<A-j>", ":m .+1<CR>==", opts)
+vim.api.nvim_set_keymap("n", "<A-k>", ":m .-2<CR>==", opts)
+
+-- Move line up and down in visual mode
+vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+vim.api.nvim_set_keymap("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

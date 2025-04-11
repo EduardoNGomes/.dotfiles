@@ -9,6 +9,7 @@ alias nv="nvim"
 alias tmks="tmux kill-session"
 alias nvconf="cd ~/.config/nvim/"
 alias aliasconf="nvim ~/.zsh-custom/aliases.zsh"
+alias envconf="nvim ~/.zsh-custom/env_vars.zsh"
 alias zsconf="nvim ~/.zshrc"
 alias dtconf="cd ~/.dotfiles/"
 alias cl="clear"
@@ -33,6 +34,27 @@ update_terminal_title() {
   fi
 }
 precmd_functions+=(update_terminal_title)
+
+
+note() {
+    cd ~ || return 1
+
+    [ -d "notes" ] || mkdir "notes"
+    cd "notes" || return 1
+
+    local filename="$1"
+    if [[ -z "$filename" ]]; then
+        echo "Usage: note <filename>"
+        return 1
+    fi
+
+    [[ "$filename" == *.md ]] || filename="${filename}.md"
+
+    [ -f "$filename" ] || touch "$filename"
+
+    nvim "$filename"
+}
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,

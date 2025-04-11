@@ -36,17 +36,27 @@ update_terminal_title() {
 precmd_functions+=(update_terminal_title)
 
 
+# Function to create my notes
 note() {
+	local original_dir
+    original_dir="$(pwd)"
+
     cd ~ || return 1
 
     [ -d "notes" ] || mkdir "notes"
     cd "notes" || return 1
 
+	if [[ "$1" == "-l" ]]; then
+		ls -la
+		cd "$original_dir" || return 1
+		return 0
+	fi
+
     local filename="$1"
     if [[ -z "$filename" ]]; then
         echo "Usage: note <filename>"
+	fi
         return 1
-    fi
 
     [[ "$filename" == *.md ]] || filename="${filename}.md"
 

@@ -3,6 +3,9 @@ vim.g.maplocalleader = " "
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Show diagnostic in the sign column
+vim.keymap.set("n", "gk", vim.diagnostic.open_float, { desc = "Show inline diagnostics" })
+
 local opts = { noremap = true, silent = true }
 -- Disable system clipboard integration for d and c commands
 vim.api.nvim_set_keymap("n", "d", '"_d', opts)

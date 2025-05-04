@@ -14,6 +14,16 @@ vim.opt.wrap = true -- Enable line wrapping
 vim.opt.linebreak = true -- Break lines at convenient word boundaries
 vim.opt.breakindent = true -- Indent wrapped lines visually
 
+-- Create a macro to log to the console
+vim.api.nvim_create_augroup("JSLogMacro", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = "JSLogMacro",
+	pattern = { "javascript", "typescript" },
+	callback = function()
+		vim.fn.setreg("l", "yoconsole.log('\027pa', \027pa);\027")
+	end,
+})
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 

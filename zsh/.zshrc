@@ -36,6 +36,11 @@ update_terminal_title() {
 precmd_functions+=(update_terminal_title)
 
 
+count(){
+	local files=( *(N) )
+    print ${#files}
+}
+
 # Function to create my notes
 note() {
 	local original_dir
@@ -53,10 +58,10 @@ note() {
 	fi
 
     local filename="$1"
-    if [[ -z "$filename" ]]; then
+	if [[ -z "$filename" ]]; then
         echo "Usage: note <filename>"
-	fi
         return 1
+	fi
 
     [[ "$filename" == *.md ]] || filename="${filename}.md"
 

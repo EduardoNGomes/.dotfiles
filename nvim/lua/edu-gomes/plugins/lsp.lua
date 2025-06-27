@@ -209,6 +209,25 @@ return {
 						},
 					},
 				},
+
+				yamlls = {
+					settings = {
+						yaml = {
+							schemas = {
+								kubernetes = "/*.yaml",
+								["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+								["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+								["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/*.{yml,yaml}",
+							},
+							format = {
+								enable = true,
+							},
+							validate = true,
+							completion = true,
+							hover = true,
+						},
+					},
+				},
 			}
 
 			-- Ensure the servers and tools above are installed

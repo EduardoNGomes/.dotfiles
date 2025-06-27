@@ -34,6 +34,8 @@ return { -- Autoformat
 		formatters_by_ft = {
 			lua = { "stylua" },
 			go = { "goimports" },
+			yaml = { "yamlfmt" },
+			yml = { "yamlfmt" },
 			-- You can use 'stop_after_first' to run the first available formatter from the list
 			-- javascript = { "prettierd", "prettier", stop_after_first = true },
 			typescriptreact = { "prettierd", "prettier", stop_after_first = true },

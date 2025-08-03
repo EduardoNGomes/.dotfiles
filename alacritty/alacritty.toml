@@ -25,3 +25,8 @@ normal.family = "JetBrainsMono Nerd Font"
 size = 12.5
 
 [terminal]
+
+[[keyboard.bindings]]
+key = "Z"
+mods = "Control"
+action = "None"

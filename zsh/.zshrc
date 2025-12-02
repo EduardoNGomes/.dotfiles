@@ -4,6 +4,9 @@ source ~/.zsh-custom/aliases.zsh
 # IMPORT ENVIRONMENT VARIABLES
 source ~/.zsh-custom/env_vars.zsh
 
+# IMPORT CUSTOM FUNCTIONS
+source ~/.zsh-custom/functions.zsh
+
 # ALIAS
 alias nv="nvim"
 alias tmks="tmux kill-session"

@@ -63,16 +63,16 @@ ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 echo "Symlink created for zsh."
 
 
-# fonts symlink
-if [ -L ~/.fonts ]; then
-  echo "Removing existing fonts symlink..."
-  rm ~/.fonts
-elif [ -e ~/.fonts ]; then
-  echo "Backing up existing fonts..."
-  mv ~/.fonts ~/.fonts.backup
-fi
-ln -s ~/.dotfiles/fonts/.fonts/ ~/.fonts
-echo "Symlink created for fonts."
+# # fonts symlink
+# if [ -L ~/.fonts ]; then
+#   echo "Removing existing fonts symlink..."
+#   rm ~/.fonts
+# elif [ -e ~/.fonts ]; then
+#   echo "Backing up existing fonts..."
+#   mv ~/.fonts ~/.fonts.backup
+# fi
+# ln -s ~/.dotfiles/fonts/.fonts/ ~/.fonts
+# echo "Symlink created for fonts."
 
 
 # Mycli symlink
@@ -109,6 +109,14 @@ if command -v firefox &> /dev/null; then
 else
   sudo pacman -S firefox
 fi
+
+#superfile
+if command -v superfile &> /dev/null; then
+  echo "Superfile is already installed."
+else
+  sudo pacman -S superfile
+fi
+
 
 #Yay
 if command -v yay &> /dev/null; then

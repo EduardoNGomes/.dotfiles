@@ -63,16 +63,9 @@ ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 echo "Symlink created for zsh."
 
 
-# # fonts symlink
-# if [ -L ~/.fonts ]; then
-#   echo "Removing existing fonts symlink..."
-#   rm ~/.fonts
-# elif [ -e ~/.fonts ]; then
-#   echo "Backing up existing fonts..."
-#   mv ~/.fonts ~/.fonts.backup
-# fi
-# ln -s ~/.dotfiles/fonts/.fonts/ ~/.fonts
-# echo "Symlink created for fonts."
+# Jetbrains fonts
+sudo pacman -S ttf-jetbrains-mono-nerd
+fc-cache -fv
 
 
 # Mycli symlink
@@ -102,6 +95,18 @@ elif [ -e ~/.oh-my-zsh/ ]; then
 fi
 ln -s ~/.dotfiles/oh-my-zsh ~/.oh-my-zsh
 echo "Symlink created for oh-my-zsh/themes."
+
+#kitty
+if [ -L ~/.config/kitty ]; then
+  echo "Removing existing kitty symlink..."
+  rm ~/.config/kitty
+elif [ -e ~/.config/kitty ]; then
+  echo "Backing up existing kitty config..."
+  mv ~/.config/kitty ~/.config/kitty.backup
+fi
+ln -s ~/.dotfiles/kitty ~/.config/kitty
+echo "Symlink created for kitty."
+
 
 #Firefox
 if command -v firefox &> /dev/null; then
@@ -146,6 +151,7 @@ if command -v unzip &> /dev/null; then
 else
 	sudo pacman -S unzip
 fi
+
 
 
 echo "All done!"

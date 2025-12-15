@@ -215,7 +215,9 @@ return {
 						},
 					},
 				},
-
+				prismals = {
+					filetypes = { "prisma" },
+				},
 				yamlls = {
 					settings = {
 						yaml = {

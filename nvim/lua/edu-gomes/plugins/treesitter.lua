@@ -1,7 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
-	main = "nvim-treesitter.configs",
+	main = "nvim-treesitter.config",
 	opts = {
 		ensure_installed = {
 			"bash",
@@ -25,7 +25,7 @@ return {
 		indent = { enable = true, disable = { "ruby" } },
 	},
 	config = function(_, opts)
-		require("nvim-treesitter.configs").setup(opts)
+		require("nvim-treesitter.config").setup(opts)
 
 		-- Custom syntax highlighting for Go
 		vim.api.nvim_create_autocmd("ColorScheme", {

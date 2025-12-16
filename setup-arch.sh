@@ -14,7 +14,7 @@ echo "Symlink created for Hyprland."
 if command -v nvim &> /dev/null; then
   echo "Neovim is already installed."
 else
-  sudo pacman -S neovim
+  sudo pacman -S neovim --noconfirm
 fi
 
 if [ -L ~/.config/nvim ]; then
@@ -32,7 +32,7 @@ echo "Symlink created for Neovim."
 if command -v tmux &> /dev/null; then
   echo "tmux is already installed."
 else
-  sudo pacman -S tmux
+  sudo pacman -S tmux --noconfirm
 fi
 if [ -L ~/.tmux.conf ]; then
   echo "Removing existing tmux symlink..."

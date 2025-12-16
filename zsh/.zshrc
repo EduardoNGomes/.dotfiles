@@ -1,11 +1,17 @@
 # IMPORT ALIASES
-source ~/.zsh-custom/aliases.zsh
+if [ -f ~/.zsh-custom/aliases.zsh ]; then
+  source ~/.zsh-custom/aliases.zsh
+fi
 
 # IMPORT ENVIRONMENT VARIABLES
-source ~/.zsh-custom/env_vars.zsh
+if [ -f ~/.zsh-custom/env_vars.zsh ]; then
+  source ~/.zsh-custom/env_vars.zsh
+fi
 
 # IMPORT CUSTOM FUNCTIONS
-source ~/.zsh-custom/functions.zsh
+if [ -f ~/.zsh-custom/functions.zsh ]; then
+  source ~/.zsh-custom/functions.zsh
+fi
 
 # ALIAS
 alias nv="nvim"

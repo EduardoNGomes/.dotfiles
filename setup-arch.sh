@@ -49,9 +49,9 @@ echo "Symlink created for tmux."
 if command -v zsh &> /dev/null; then
   echo "zsh is already installed."
 else
-  sudo pacman -S zsh
+  sudo pacman -S zsh --noconfirm
 fi
-chsh -s $(which zsh)
+
 if [ -L ~/.zshrc ]; then
   echo "Removing existing zsh symlink..."
   rm ~/.zshrc
@@ -64,9 +64,7 @@ echo "Symlink created for zsh."
 
 
 # Jetbrains fonts
-sudo pacman -S ttf-jetbrains-mono-nerd
-fc-cache -fv
-
+sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
 
 # Mycli symlink
 if [ -L ~/.myclirc ]; then
@@ -112,14 +110,14 @@ echo "Symlink created for kitty."
 if command -v firefox &> /dev/null; then
   echo "Firefox is already installed."
 else
-  sudo pacman -S firefox
+  sudo pacman -S firefox --noconfirm
 fi
 
 #superfile
 if command -v superfile &> /dev/null; then
   echo "Superfile is already installed."
 else
-  sudo pacman -S superfile
+  sudo pacman -S superfile --noconfirm
 fi
 
 
@@ -131,28 +129,29 @@ else
 fi
 
 
-#Vicenea
-if command -v vice &> /dev/null; then
+#Vicenae
+if command -v vicinae &> /dev/null; then
   echo "Vicenea is already installed."
 else
-  sudo yay -S vice
+   yay -S vicinae --noconfirm
 fi
 
 #Garoa
 if command -v garoa &> /dev/null; then
   echo "Garoa is already installed."
 else
-  sudo yay -S garoa
+  yay -S garoa --noconfirm
 fi
 
 #Unzip
 if command -v unzip &> /dev/null; then
   echo "Unzip is already installed."
 else
-	sudo pacman -S unzip
+	sudo pacman -S unzip --noconfirm
 fi
 
 
+echo "Type 'chsh -s $(which zsh)' to define zsh as default"
 
 echo "All done!"
 

@@ -148,23 +148,6 @@ if command -v unzip &> /dev/null; then
 else
   sudo pacman -S unzip --noconfirm
 fi
-# NVM e Node LTS
-
-if [ -d "$HOME/.nvm" ]; then
-    echo "NVM is already installed."
-else
-    echo "Installing NVM..."
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
-    # Carrega o NVM para uso imediato no script
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    
-    echo "Installing Node LTS and setting as default..."
-    nvm install --lts
-    nvm alias default 'lts/*'
-fi
-
 
 echo ""
 echo "-------------------------------------------------------"

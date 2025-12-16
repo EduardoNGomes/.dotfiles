@@ -28,6 +28,17 @@ fi
 ln -s ~/.dotfiles/nvim ~/.config/nvim
 echo "Symlink created for Neovim."
 
+#git
+if [ -L ~/.gitconfig ]; then
+  echo "Removing existing gitconfig symlink..."
+  rm ~/.gitconfig
+elif [ -e ~/.gitconfig ]; then
+  echo "Backing up existing gitconfig..."
+  mv ~/.gitconfig ~/.gitconfig.backup
+fi
+ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+echo "Symlink created for git."
+
 # tmux 
 if command -v tmux &> /dev/null; then
   echo "tmux is already installed."

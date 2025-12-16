@@ -127,7 +127,7 @@ fi
 if command -v yay &> /dev/null; then
   echo "Yay is already installed."
 else
-  sudo pacman -S yay
+	sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 fi
 
 

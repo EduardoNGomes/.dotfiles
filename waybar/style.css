@@ -325,3 +325,70 @@ label:focus {
 #privacy-item.audio-out {
     background-color: #0069d4;
 }
+
+/* window#waybar { */
+/* ------------------- */
+/*     background-color: rgba(30, 34, 42, 0.85); */
+/*     border-bottom: 2px solid rgba(71, 228, 174, 0.6); */
+/*     color: #cdd6f4; */
+/**/
+/*     transition-property: background-color, border-color; */
+/*     transition-duration: 0.4s; */
+/* } */
+/**/
+/* /* Workspaces */ */
+/* #workspaces button { */
+/*     padding: 0 8px; */
+/*     margin: 4px 2px; */
+/*     color: #a6adc8; */
+/*     background: transparent; */
+/*     border-radius: 6px; */
+/* } */
+/**/
+/* #workspaces button.active { */
+/*     color: #1e1e2e; */
+/*     background-color: #47E4AE; */
+/*     box-shadow: 0 0 6px rgba(71, 228, 174, 0.6); */
+/* } */
+/**/
+/* #workspaces button:hover { */
+/*     background-color: rgba(71, 228, 174, 0.15); */
+/*     color: #47E4AE; */
+/* } */
+/**/
+/* /* Módulos gerais */ */
+/* #clock, */
+/* #cpu, */
+/* #memory, */
+/* #network, */
+/* #pulseaudio, */
+/* #battery, */
+/* #tray { */
+/*     padding: 0 10px; */
+/*     margin: 4px 3px; */
+/*     border-radius: 6px; */
+/*     background-color: rgba(43, 48, 59, 0.6); */
+/* } */
+/**/
+/* /* Destaque verde nos ícones */ */
+/* #cpu, */
+/* #memory, */
+/* #network, */
+/* #pulseaudio { */
+/*     color: #47E4AE; */
+/* } */
+/**/
+/* /* Bateria crítica */ */
+/* #battery.critical { */
+/*     color: #f38ba8; */
+/* } */
+/**/
+/* /* Hover geral */ */
+/* #clock:hover, */
+/* #cpu:hover, */
+/* #memory:hover, */
+/* #network:hover, */
+/* #pulseaudio:hover, */
+/* #battery:hover { */
+/*     background-color: rgba(71, 228, 174, 0.15); */
+/* } */

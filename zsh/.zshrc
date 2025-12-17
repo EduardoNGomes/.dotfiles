@@ -13,9 +13,12 @@ if [ -f ~/.zsh-custom/functions.zsh ]; then
   source ~/.zsh-custom/functions.zsh
 fi
 
+
 # ALIAS
 alias nv="nvim"
 alias hconf="nvim ~/.config/hypr/hyprland.conf"
+alias kconf="nvim ~/.config/kitty/kitty.conf"
+alias wconf="nvim ~/.config/waybar"
 alias tmks="tmux kill-session"
 alias nvconf="cd ~/.config/nvim/"
 alias aliasconf="nvim ~/.zsh-custom/aliases.zsh"

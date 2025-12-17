@@ -11,7 +11,14 @@ fi
 ln -s ~/.dotfiles/hypr ~/.config/hypr
 echo "Symlink created for Hyprland."
 
+
+
 # Waybar
+if command -v waybar &> /dev/null; then
+  echo "Waybar is already installed."
+else
+  sudo pacman -S waybar --noconfirm
+fi
 if [ -L ~/.config/waybar ]; then
   echo "Removing existing Waybar symlink..."
   rm ~/.config/waybar

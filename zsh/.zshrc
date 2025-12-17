@@ -15,6 +15,7 @@ fi
 
 # ALIAS
 alias nv="nvim"
+alias hconf="nvim ~/.config/hypr/hyprland.conf"
 alias tmks="tmux kill-session"
 alias nvconf="cd ~/.config/nvim/"
 alias aliasconf="nvim ~/.zsh-custom/aliases.zsh"

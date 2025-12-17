@@ -11,6 +11,17 @@ fi
 ln -s ~/.dotfiles/hypr ~/.config/hypr
 echo "Symlink created for Hyprland."
 
+# Waybar
+if [ -L ~/.config/waybar ]; then
+  echo "Removing existing Waybar symlink..."
+  rm ~/.config/waybar
+elif [ -e ~/.config/waybar ]; then
+  echo "Backing up existing Waybar config..."
+  mv ~/.config/waybar ~/.config/waybar.backup
+fi
+ln -s ~/.dotfiles/waybar ~/.config/waybar
+echo "Symlink created for Waybar."
+
 # Neovim 
 if command -v nvim &> /dev/null; then
   echo "Neovim is already installed."
@@ -105,6 +116,12 @@ fi
 ln -s ~/.dotfiles/oh-my-zsh ~/.oh-my-zsh
 echo "Symlink created for oh-my-zsh."
 
+# zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
 # kitty
 if [ -L ~/.config/kitty ]; then
   echo "Removing existing kitty symlink..."
@@ -115,6 +132,13 @@ elif [ -e ~/.config/kitty ]; then
 fi
 ln -s ~/.dotfiles/kitty ~/.config/kitty
 echo "Symlink created for kitty."
+
+#git-delta
+if command -v git-delta &> /dev/null; then
+  echo "git-delta is already installed."
+else
+  sudo pacman -S git-delta --noconfirm
+fi
 
 # Firefox
 if command -v firefox &> /dev/null; then

@@ -12,6 +12,8 @@ ln -s ~/.dotfiles/hypr ~/.config/hypr
 echo "Symlink created for Hyprland."
 
 
+#clibboard
+sudo pacman -S wl-clipboard --noconfirm
 
 # Waybar
 if command -v waybar &> /dev/null; then

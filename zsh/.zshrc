@@ -18,6 +18,7 @@ fi
 alias nv="nvim"
 alias hconf="nvim ~/.config/hypr/hyprland.conf"
 alias kconf="nvim ~/.config/kitty/kitty.conf"
+alias waybar-reload="killall -SIGUSR2 waybar"
 alias wconf="nvim ~/.config/waybar"
 alias tmks="tmux kill-session"
 alias nvconf="cd ~/.config/nvim/"

@@ -172,6 +172,13 @@ else
     (sudo pacman -S --needed git base-devel --noconfirm && git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si --noconfirm)
 fi
 
+# Wlogout
+if command -v wlogout &> /dev/null; then
+  echo "Wlogout is already installed."
+else
+  yay -S wlogout --noconfirm
+fi
+
 # Vicinae
 if command -v vicinae &> /dev/null; then
   echo "Vicinae is already installed."

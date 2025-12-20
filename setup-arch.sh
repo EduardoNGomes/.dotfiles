@@ -142,6 +142,13 @@ fi
 ln -s ~/.dotfiles/kitty ~/.config/kitty
 echo "Symlink created for kitty."
 
+#PDF reader
+if command -v zathura &> /dev/null; then
+  echo "Zathura is already installed."
+else
+  sudo pacman -S zathura --noconfirm
+fi
+
 #git-delta
 if command -v git-delta &> /dev/null; then
   echo "git-delta is already installed."

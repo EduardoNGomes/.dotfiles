@@ -57,12 +57,15 @@ button {
 
 #custom-power {
     background-color: @red;
-    padding: 0 10pt 0 12pt;
+	margin-left: 12px;
+    padding: 0 8pt 0 10pt;
+	border-radius:9999px;
     color: @snow1;
 }
 
 #battery {
     padding: 0 10pt 0 8px;
+	border-radius: 0 9999px 9999px 0;
 }
 
 #battery.warning:not(.charging),
@@ -139,6 +142,7 @@ button {
     padding-right: 12pt;
     padding-left: 8pt;
     background-color: @polar0;
+	color:@frost1;
     border-radius: 0px 24px 24px 0px;
 }
 
@@ -146,7 +150,7 @@ button {
     background-color: @frost1;
     padding-right: 14pt;
     color: @polar0;
-    border-right: 2px solid @frost0;
+    border-right: 2px solid @frost1;
 }
 
 #tray {

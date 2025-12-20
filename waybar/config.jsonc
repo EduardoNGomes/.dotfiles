@@ -31,12 +31,14 @@
         "on-scroll-up": "hyprctl dispatch workspace r-1",
         "on-scroll-down": "hyprctl dispatch workspace r+1",
         "format": "{id} {windows}",
-        "window-rewrite-default": "",
+        "window-rewrite-default": " ",
         "window-rewrite": {
             "class<.*google-chrome.*>": " ",
             "class<.*firefox.*>": "󰈹 ",
             "class<.*terminal.*>": " ",
+            "class<.*kitty.*>": " ",
             "title<.*nvim.*>": " ",
+            "title<nv.*>": " ",
             "class<.*discord.*>": " ",
             "class<.*steam.*>": " ",
             "class<.*garoa.*>": " "

@@ -180,7 +180,7 @@
     },
     "custom/power": {
         "format": "⏻ ",
-        "tooltip": false,
-        "on-click": "wlogout -s"
+        "tooltip": true,
+        "on-click": "wlogout"
     }
 }

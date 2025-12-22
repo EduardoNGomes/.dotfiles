@@ -186,6 +186,13 @@ else
   yay -S wlogout --noconfirm
 fi
 
+# Hyprshot
+if command -v hyprshot &> /dev/null; then
+  echo "Hyprshot is already installed."
+else
+  yay -S hyprshot --noconfirm
+fi
+
 # Vicinae
 if command -v vicinae &> /dev/null; then
   echo "Vicinae is already installed."

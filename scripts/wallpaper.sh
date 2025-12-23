@@ -5,8 +5,7 @@ INTERVAL=300
 
 if ! swww query &> /dev/null; then
     swww-daemon --format xrgb &
-    wait $!
-    sleep 1 
+    sleep 1
 fi
 
 while true; do
@@ -21,5 +20,5 @@ while true; do
             --transition-wave 50,25
     fi
 
-    sleep $INTERVAL
+    sleep "$INTERVAL"
 done

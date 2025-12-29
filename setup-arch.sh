@@ -11,6 +11,17 @@ fi
 ln -s ~/.dotfiles/hypr ~/.config/hypr
 echo "Symlink created for Hyprland."
 
+# dunst
+if [ -L ~/.config/dunst ]; then
+  echo "Removing existing dunst symlink..."
+  rm ~/.config/dunst
+  elif [ -e ~/.config/dunst ]; then
+    echo "Backing up existing dunst config..."
+    mv ~/.config/dunst ~/.config/dunst.backup
+fi
+ln -s ~/.dotfiles/dunst ~/.config/dunst
+echo "Symlink created for dunst."
+
 
 #clibboard
 sudo pacman -S wl-clipboard --noconfirm

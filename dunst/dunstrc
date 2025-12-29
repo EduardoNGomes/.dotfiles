@@ -196,9 +196,3 @@
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
-
-[discord_silence]
-    appname = "Discord"
-    summary = "*"
-    skip_display = true
-    history_ignore = true

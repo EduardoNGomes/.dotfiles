@@ -58,7 +58,7 @@ button {
 #custom-power {
     background-color: @red;
 	margin-left: 12px;
-    padding: 0 8pt 0 10pt;
+    padding: 0 8pt 0 11pt;
 	border-radius:9999px;
     color: @snow1;
 }

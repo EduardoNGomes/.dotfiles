@@ -143,8 +143,8 @@
         "format": "{icon} {volume}%",
         "format-muted": "  Mute",
         "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "on-scroll-up": "~/dotfiles/scripts/volume.sh sink --up",
-        "on-scroll-down": "~/dotfiles/scripts/volume.sh sink --down",
+        "on-scroll-up": "~/.dotfiles/scripts/volume.sh sink --up",
+        "on-scroll-down": "~/.dotfiles/scripts/volume.sh sink --down",
         "tooltip-format": "{icon} {desc} | {volume}%",
         "scroll-step": 5,
         "format-icons": {
@@ -164,8 +164,8 @@
         "format-source-muted": " ",
         "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
         "tooltip-format": "{format_source} {source_desc} | {source_volume}%",
-        "on-scroll-up": "~/dotfiles/scripts/volume.sh source --up",
-        "on-scroll-down": "~/dotfiles/scripts/volume.sh source --down",
+        "on-scroll-up": "~/.dotfiles/scripts/volume.sh source --up",
+        "on-scroll-down": "~/.dotfiles/scripts/volume.sh source --down",
         "scroll-step": 5
     },
     "custom/placeholder": {

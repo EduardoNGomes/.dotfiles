@@ -38,7 +38,8 @@ alias clb="git branch --merged main | grep -v "main" | xargs git branch -D"
 export ZSH="$HOME/.oh-my-zsh"
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
-
+export EDITOR=vim
+export VISUAL=vim
 # UPDATE TERMINAL TITLE
 update_terminal_title() {
   if [[ -n "$TMUX" ]]; then

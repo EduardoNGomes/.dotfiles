@@ -34,7 +34,24 @@ return {
 			codex:toggle(width, "vertical")
 		end
 
+		local gemini = Terminal:new({
+			cmd = "ESCDELAY=0 gemini",
+			hidden = true,
+			direction = "vertical",
+			on_open = function(term)
+				vim.cmd("startinsert!")
+				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], { buffer = term.bufnr, nowait = true })
+			end,
+		})
+
+		local function toggle_gemini()
+			local width = vim.o.columns * 0.4
+
+			gemini:toggle(width, "vertical")
+		end
+
 		vim.keymap.set("n", "<leader>T", toggle_tmux, { desc = "Toggle Terminal (Tmux)" })
 		vim.keymap.set("n", "<leader>tc", toggle_codex, { desc = "Toggle Codex (Side)" })
+		vim.keymap.set("n", "<leader>tg", toggle_gemini, { desc = "Toggle Gemini (Side)" })
 	end,
 }

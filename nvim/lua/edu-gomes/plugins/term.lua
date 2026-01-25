@@ -50,7 +50,19 @@ return {
 			gemini:toggle(width, "vertical")
 		end
 
+		local open_code = Terminal:new({
+			cmd = "opencode",
+			hidden = true,
+			direction = "vertical",
+		})
+
+		local function toggle_open_code()
+			local width = vim.o.columns * 0.4
+			open_code:toggle(width, "vertical")
+		end
+
 		vim.keymap.set("n", "<leader>T", toggle_tmux, { desc = "Toggle Terminal (Tmux)" })
+		vim.keymap.set("n", "<leader>to", toggle_open_code, { desc = "Toggle OpenCode (Side)" })
 		vim.keymap.set("n", "<leader>tc", toggle_codex, { desc = "Toggle Codex (Side)" })
 		vim.keymap.set("n", "<leader>tg", toggle_gemini, { desc = "Toggle Gemini (Side)" })
 	end,

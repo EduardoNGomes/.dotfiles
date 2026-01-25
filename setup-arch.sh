@@ -22,6 +22,17 @@ fi
 ln -s ~/.dotfiles/dunst ~/.config/dunst
 echo "Symlink created for dunst."
 
+# Opencode
+if [ -L ~/.config/opencode ]; then
+  echo "Removing existing Opencode symlink..."
+  rm ~/.config/opencode/config.json
+elif [ -e ~/.config/opencode ]; then
+  echo "Backing up existing Opencode config..."
+  mv ~/.config/opencode ~/.config/opencode.backup
+fi
+ln -s ~/.dotfiles/opencode/config.json ~/.config/opencode/config.json
+echo "Symlink created for Opencode."
+
 
 #clibboard
 sudo pacman -S wl-clipboard --noconfirm

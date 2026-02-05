@@ -41,27 +41,21 @@ function pdf(){
 
 # Function to build and install golang project
 function gobuild() {
+    local current_dir="$(pwd)"
     if [ -z "$1" ]; then
         echo "Usage: gobuild <directory_path>"
         return 1
     fi
 
     local TARGET_DIR="$1"
-    local INSTALLER="install.sh"
 
     if [ ! -d "$TARGET_DIR" ]; then
         echo "Directory not found: $TARGET_DIR"
         return 1
     fi
 
-    if [ ! -f "$TARGET_DIR/$INSTALLER" ]; then
-        echo "Installer ($INSTALLER) not found in $TARGET_DIR"
-        return 1
-    fi
-
     pushd "$TARGET_DIR" > /dev/null || return 1
 
-    chmod +x "$INSTALLER"
 
     local BIN_NAME="${PWD##*/}"
 
@@ -73,10 +67,20 @@ function gobuild() {
 
     go build -ldflags="-s -w" -o "$BIN_NAME_LOWER" ./cmd
 
-    echo "Running installer..."
-    ./"$INSTALLER"
+    local INSTALL_PATH=/usr/local/bin/"$BIN_NAME_LOWER"
+
+    if [ ! -f "$INSTALL_PATH" ]; then
+        echo "instaling $bin em /usr/local/bin..."
+        sudo cp "$BIN_NAME_LOWER" "$INSTALL_PATH"
+        sudo chmod 755 "$INSTALL_PATH"
+    else
+    	echo "$BIN_NAME_LOWER already exists in /usr/local/bin, updating..."
+        sudo cp "$BIN_NAME_LOWER" "$INSTALL_PATH"
+        sudo chmod 755 "$INSTALL_PATH"
+    fi
 
     popd > /dev/null
+    cd "$current_dir" || return 1
 }
 
 # Function to create my notes

@@ -22,6 +22,18 @@ fi
 ln -s ~/.dotfiles/dunst ~/.config/dunst
 echo "Symlink created for dunst."
 
+
+#fcitx5
+if [ -L ~/.config/fcitx5 ]; then
+  echo "Removing existing fcitx5 symlink..."
+  rm ~/.config/fcitx5
+elif [ -e ~/.config/fcitx5 ]; then
+  echo "Backing up existing fcitx5 config..."
+  mv ~/.config/fcitx5 ~/.config/fcitx5.backup
+fi
+ln -s ~/.dotfiles/fcitx5 ~/.config/fcitx5
+echo "Symlink created for fcitx5."
+
 # Opencode
 if [ -L ~/.config/opencode ]; then
   echo "Removing existing Opencode symlink..."

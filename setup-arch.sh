@@ -49,6 +49,9 @@ echo "Symlink created for Opencode."
 #clibboard
 sudo pacman -S wl-clipboard --noconfirm
 
+# less
+sudo pacman -S less --noconfirm
+
 # Waybar
 if command -v waybar &> /dev/null; then
   echo "Waybar is already installed."

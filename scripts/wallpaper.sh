@@ -12,8 +12,8 @@ TRANSITION_DURATION=2
 TRANSITION_ANGLE=270
 TRANSITION_WAVE="50,25"
 
-if ! swww query &> /dev/null; then
-    swww-daemon --format xrgb &
+if ! awww query &> /dev/null; then
+    awww-daemon --format xrgb &
     sleep 1
 fi
 
@@ -53,7 +53,7 @@ else
 		  RANDOM_IMG=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
 
 		  if [[ -n "$RANDOM_IMG" ]]; then
-			  swww img "$RANDOM_IMG" \
+			  awww img "$RANDOM_IMG" \
 				  --transition-type wave \
 				  --transition-fps 144 \
 				  --transition-duration 2 \
@@ -66,7 +66,7 @@ else
   fi
 fi
 
-swww img "$wallpaper" \
+awww img "$wallpaper" \
   --transition-type     "$TRANSITION_TYPE" \
   --transition-fps      "$TRANSITION_FPS" \
   --transition-duration "$TRANSITION_DURATION" \

@@ -46,6 +46,8 @@ export VISUAL=vim
 
 ZSH_THEME="leaf"
 
+# zoxide
+eval "$(zoxide init zsh)"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 

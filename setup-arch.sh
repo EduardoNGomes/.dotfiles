@@ -120,6 +120,14 @@ else
   sudo pacman -S zsh --noconfirm
 fi
 
+# zoxide
+if command -v zoxide &> /dev/null; then
+  echo "zoxide is already installed."
+else
+  sudo pacman -S zoxide
+fi
+
+
 if [ -L ~/.zshrc ]; then
   echo "Removing existing zsh symlink..."
   rm ~/.zshrc

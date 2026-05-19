@@ -238,6 +238,13 @@ else
   yay -S wlogout --noconfirm
 fi
 
+# flameshot
+if command -v flameshot &> /dev/null; then
+  echo "flameshot is already installed."
+else
+  yay -S flameshot-git --noconfirm
+fi
+
 # Hyprshot
 if command -v hyprshot &> /dev/null; then
   echo "Hyprshot is already installed."

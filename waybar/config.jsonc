@@ -11,6 +11,7 @@
     "modules-right": [
         "mpd",
         "custom/placeholder",
+        "network",
         "pulseaudio",
         "pulseaudio#microphone",
         "backlight",
@@ -76,8 +77,18 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "󱑂 {:%H:%M}",
+        "format": "󱑂 {:%H:%M %d/%b}",
         "format-alt": " {:%d/%m/%Y}"
+    },
+    "network": {
+        "format-wifi": "󰖩 {essid}",
+        "format-ethernet": "󰈀 {ifname}",
+        "format-linked": "󰈀 {ifname}",
+        "format-disconnected": "󰖪",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "Disconnected"
     },
     "cpu": {
         "format": " {usage}%",

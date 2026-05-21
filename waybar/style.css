@@ -44,6 +44,7 @@ button {
 #disk,
 #temperature,
 #backlight,
+#network,
 #pulseaudio,
 #custom-media,
 #tray,
@@ -106,6 +107,14 @@ button {
 }
 
 #temperature.critical {
+    color: @red;
+}
+
+#network {
+    color: @frost3;
+}
+
+#network.disconnected {
     color: @red;
 }
 

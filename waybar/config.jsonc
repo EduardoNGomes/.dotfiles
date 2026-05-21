@@ -20,8 +20,8 @@
         "memory",
         "disk",
         "custom/packages",
-        "clock",
         "battery",
+        "clock",
         "custom/power"
     ],
     "hyprland/workspaces": {

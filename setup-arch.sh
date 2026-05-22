@@ -273,6 +273,53 @@ else
   sudo pacman -S unzip --noconfirm
 fi
 
+# SDDM + Astronaut theme (Keyitdev/sddm-astronaut-theme)
+# Guard: disable any competing display manager that may be enabled on other machines
+for dm in gdm lightdm lxdm greetd ly; do
+  if systemctl is-enabled "${dm}.service" &> /dev/null; then
+    echo "Disabling ${dm}.service (replacing with sddm)..."
+    sudo systemctl disable "${dm}.service"
+  fi
+done
+
+# Install SDDM and theme dependencies
+if command -v sddm &> /dev/null; then
+  echo "SDDM is already installed."
+else
+  sudo pacman -S sddm --noconfirm
+fi
+sudo pacman -S --needed --noconfirm qt6-svg qt6-virtualkeyboard qt6-multimedia
+
+# Enable SDDM
+if systemctl is-enabled sddm.service &> /dev/null; then
+  echo "sddm.service is already enabled."
+else
+  sudo systemctl enable sddm.service
+fi
+
+# Install Astronaut theme
+SDDM_THEME_DIR="/usr/share/sddm/themes/sddm-astronaut-theme"
+if [ -d "$SDDM_THEME_DIR" ]; then
+  echo "sddm-astronaut-theme already present, pulling latest..."
+  sudo git -C "$SDDM_THEME_DIR" pull --ff-only || true
+else
+  echo "Cloning sddm-astronaut-theme..."
+  sudo git clone --depth 1 https://github.com/Keyitdev/sddm-astronaut-theme.git "$SDDM_THEME_DIR"
+fi
+
+# Install theme fonts
+if [ -d "$SDDM_THEME_DIR/Fonts" ]; then
+  sudo cp -r "$SDDM_THEME_DIR"/Fonts/* /usr/share/fonts/
+fi
+
+# Select 'astronaut' variant
+sudo sed -i 's|^ConfigFile=.*|ConfigFile=Themes/astronaut.conf|' "$SDDM_THEME_DIR/metadata.desktop"
+
+# Point SDDM at the theme
+sudo mkdir -p /etc/sddm.conf.d
+echo -e "[Theme]\nCurrent=sddm-astronaut-theme" | sudo tee /etc/sddm.conf > /dev/null
+echo -e "[General]\nInputMethod=qtvirtualkeyboard" | sudo tee /etc/sddm.conf.d/virtualkbd.conf > /dev/null
+
 echo ""
 echo "-------------------------------------------------------"
 echo "Configuration finished!"

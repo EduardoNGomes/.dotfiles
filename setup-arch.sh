@@ -138,8 +138,25 @@ fi
 ln -s ~/.dotfiles/zsh/.zshrc ~/.zshrc
 echo "Symlink created for zsh."
 
-# Jetbrains fonts
-sudo pacman -S ttf-jetbrains-mono-nerd --noconfirm
+# Fonts
+sudo pacman -S --needed --noconfirm \
+  ttf-jetbrains-mono-nerd \
+  ttf-hack-nerd \
+  noto-fonts-emoji \
+  noto-fonts-cjk \
+  otf-font-awesome
+
+mkdir -p ~/.config/fontconfig
+if [ -L ~/.config/fontconfig/fonts.conf ]; then
+  echo "Removing existing fontconfig symlink..."
+  rm ~/.config/fontconfig/fonts.conf
+elif [ -e ~/.config/fontconfig/fonts.conf ]; then
+  echo "Backing up existing fontconfig config..."
+  mv ~/.config/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf.backup
+fi
+ln -s ~/.dotfiles/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
+echo "Symlink created for fontconfig."
+fc-cache -fv
 
 # Mycli symlink
 if [ -L ~/.myclirc ]; then

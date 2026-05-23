@@ -15,7 +15,8 @@
         "pulseaudio",
         "pulseaudio#microphone",
         "backlight",
-        "temperature",
+        "temperature#cpu",
+        "temperature#gpu",
         "cpu",
         "memory",
         "disk",
@@ -102,16 +103,19 @@
         "format": "󰆼 {percentage_used}%",
         "tooltip-format": "{used} / {total}"
     },
-    "temperature": {
+    "temperature#cpu": {
+        "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
+        "input-filename": "temp1_input",
         "critical-threshold": 80,
-        "format": "{icon} {temperatureC}°C",
-        "format-icons": [
-            "󱃃",
-            "󰔏",
-            "󱃂",
-            "󰸁"
-        ],
-        "tooltip": false
+        "format": " {temperatureC}°C",
+        "tooltip-format": "CPU {temperatureC}°C"
+    },
+    "temperature#gpu": {
+        "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:03.1/0000:09:00.0/0000:0a:00.0/0000:0b:00.0/hwmon",
+        "input-filename": "temp1_input",
+        "critical-threshold": 80,
+        "format": "󰢮 {temperatureC}°C",
+        "tooltip-format": "GPU {temperatureC}°C"
     },
     "backlight": {
         "format": "{icon} {percent}%",

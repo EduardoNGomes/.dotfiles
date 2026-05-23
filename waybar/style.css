@@ -110,6 +110,14 @@ button {
     color: @yellow;
 }
 
+#temperature.cpu {
+    color: @yellow;
+}
+
+#temperature.gpu {
+    color: @green;
+}
+
 #temperature.critical {
     color: @red;
 }

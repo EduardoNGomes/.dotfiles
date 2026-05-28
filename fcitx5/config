@@ -1,6 +1,6 @@
 [Hotkey]
 # Enumerate when holding modifier of Toggle key
-EnumerateWithTriggerKeys=True
+EnumerateWithTriggerKeys=False
 # Enumerate Input Method Forward
 EnumerateForwardKeys=
 # Enumerate Input Method Backward
@@ -11,9 +11,6 @@ EnumerateSkipFirst=False
 ModifierOnlyKeyTimeout=250
 
 [Hotkey/TriggerKeys]
-0=Alt+Shift+Shift_L
-1=Zenkaku_Hankaku
-2=Hangul
 
 [Hotkey/ActivateKeys]
 0=Hangul_Hanja
@@ -22,13 +19,18 @@ ModifierOnlyKeyTimeout=250
 0=Hangul_Romaja
 
 [Hotkey/AltTriggerKeys]
-0=Shift_L
 
 [Hotkey/EnumerateGroupForwardKeys]
 0=Super+space
 
 [Hotkey/EnumerateGroupBackwardKeys]
 0=Shift+Super+space
+
+[Hotkey/EnumerateForwardKeys]
+0=Alt+Shift+Shift_L
+1=Alt+Shift+Shift_R
+
+[Hotkey/EnumerateBackwardKeys]
 
 [Hotkey/PrevPage]
 0=Up
@@ -80,4 +82,3 @@ AllowInputMethodForPassword=False
 ShowPreeditForPassword=False
 # Interval of saving user data in minutes
 AutoSavePeriod=30
-

@@ -24,6 +24,12 @@ echo "Symlink created for dunst."
 
 
 #fcitx5
+sudo pacman -S --needed --noconfirm \
+  fcitx5 \
+  fcitx5-configtool \
+  fcitx5-gtk \
+  fcitx5-qt
+
 if [ -L ~/.config/fcitx5 ]; then
   echo "Removing existing fcitx5 symlink..."
   rm ~/.config/fcitx5

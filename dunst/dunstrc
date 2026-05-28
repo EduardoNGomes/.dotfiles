@@ -4,31 +4,31 @@
     follow = mouse
     
     ### Geometry ###
-    width = 300
+    width = 340
     height = (0, 300)
     origin = top-right
-    offset = (15, 15)
+    offset = (16, 16)
     scale = 0
     notification_limit = 5
 
     progress_bar = true
-    progress_bar_height = 8
+    progress_bar_height = 6
     progress_bar_frame_width = 0
-    progress_bar_min_width = 150
+    progress_bar_min_width = 160
     progress_bar_max_width = 300
-    progress_bar_corner_radius = 4
+    progress_bar_corner_radius = 3
 
-    separator_height = 2
-    padding = 12
-    horizontal_padding = 12
-    text_icon_padding = 10
+    separator_height = 0
+    padding = 14
+    horizontal_padding = 16
+    text_icon_padding = 12
     
-	frame_width = 1
+	frame_width = 2
     separator_color = frame
 
-	font = JetBrainsMono Nerd Font 10
+	font = Hack Nerd Font 10
     markup = full
-    format = "<b>%s</b>\n\n%b"
+    format = "<b>%s</b>\n%b"
     alignment = left
     vertical_alignment = center
     show_age_threshold = 60
@@ -39,10 +39,10 @@
     enable_recursive_icon_lookup = true
     icon_theme = "Adwaita"
     icon_position = left
-    min_icon_size = 32
-    max_icon_size = 64
+    min_icon_size = 36
+    max_icon_size = 56
 
-    corner_radius = 10
+    corner_radius = 18
     corners = all
 
     layer = top
@@ -52,20 +52,24 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    background = "#1E1E2E"
-    foreground = "#CDD6F4"
+    background = "#2e3440"
+    foreground = "#d8dee9"
+    frame_color = "#3b4252"
+    highlight = "#8fbcbb"
     timeout = 5
 
 [urgency_normal]
-    background = "#47E4AE"
-    foreground = "#111111"
-    highlight = "#111111"
+    background = "#2e3440"
+    foreground = "#eceff4"
+    frame_color = "#47E4AE"
+    highlight = "#47E4AE"
     timeout = 6
 
 [urgency_critical]
-    background = "#F38BA8"
-    foreground = "#181825"
-    frame_color = "#F38BA8"
+    background = "#bf616a"
+    foreground = "#e5e9f0"
+    frame_color = "#bf616a"
+    highlight = "#ebcb8b"
     timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to

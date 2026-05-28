@@ -40,6 +40,17 @@ fi
 ln -s ~/.dotfiles/fcitx5 ~/.config/fcitx5
 echo "Symlink created for fcitx5."
 
+mkdir -p ~/.local/share/fcitx5/themes
+if [ -L ~/.local/share/fcitx5/themes/nord-waybar ]; then
+  echo "Removing existing fcitx5 nord-waybar theme symlink..."
+  rm ~/.local/share/fcitx5/themes/nord-waybar
+elif [ -e ~/.local/share/fcitx5/themes/nord-waybar ]; then
+  echo "Backing up existing fcitx5 nord-waybar theme..."
+  mv ~/.local/share/fcitx5/themes/nord-waybar ~/.local/share/fcitx5/themes/nord-waybar.backup
+fi
+ln -s ~/.dotfiles/fcitx5/themes/nord-waybar ~/.local/share/fcitx5/themes/nord-waybar
+echo "Symlink created for fcitx5 nord-waybar theme."
+
 # Opencode
 if [ -L ~/.config/opencode ]; then
   echo "Removing existing Opencode symlink..."

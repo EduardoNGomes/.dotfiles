@@ -6,6 +6,13 @@
 #  - Otherwise launch `flameshot gui` and float+center the picker when it
 #    appears, so it doesn't open tiled.
 
+monitor_count=$(hyprctl monitors -j | jq 'length')
+
+if (( monitor_count <= 1 )); then
+    flameshot gui &
+    exit 0
+fi
+
 portal_query='.[] | select(
     (.class | test("xdg-desktop-portal"; "i"))
     or (.class | test("flameshot"; "i"))

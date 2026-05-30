@@ -16,7 +16,7 @@ window#waybar {
 .modules-left,
 .modules-right {
     background-color: @polar0;
-    border-radius: 24px;
+    border-radius: 8px;
     margin-top: 4pt;
     border: none;
     background-color: transparent;
@@ -60,7 +60,7 @@ button {
     background-color: @red;
 	margin-left: 12px;
     padding: 0 8pt 0 11pt;
-	border-radius:9999px;
+	border-radius: 8px;
     color: @snow1;
 }
 
@@ -70,7 +70,7 @@ button {
 
 #clock {
     padding: 0 10pt 0 8px;
-    border-radius: 0 9999px 9999px 0;
+    border-radius: 0 8px 8px 0;
 }
 
 #battery.warning:not(.charging),
@@ -131,13 +131,13 @@ button {
 }
 
 #custom-placeholder {
-    border-radius: 24px 0px 0px 24px;
+    border-radius: 8px 0px 0px 8px;
     background-color: @polar0;
     padding-right: 8px;
 }
 
 #mpd {
-    border-radius: 24px;
+    border-radius: 8px;
     padding: 0 20px;
     margin-right: 16px;
 
@@ -154,7 +154,7 @@ button {
 
 #workspaces {
     background-color: @polar0;
-    border-radius: 24px;
+    border-radius: 8px;
     padding: 2px;
 }
 
@@ -164,7 +164,7 @@ button {
     padding: 2px 8pt;
     background-color: transparent;
     color: @frost1;
-    border-radius: 24px;
+    border-radius: 8px;
     transition-property: background-color, color;
     transition-duration: 180ms;
 }
@@ -189,7 +189,7 @@ button {
 #tray {
     margin: 0 16px;
     padding: 0 12pt;
-    border-radius: 24px;
+    border-radius: 8px;
 }
 
 /* #privacy { */

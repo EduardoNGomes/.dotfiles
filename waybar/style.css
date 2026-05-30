@@ -154,7 +154,7 @@ button {
 
 #workspaces {
     background-color: @polar0;
-    border-radius: 0px 24px 24px 0px;
+    border-radius: 24px;
     border-right: none;
 }
 
@@ -165,6 +165,14 @@ button {
     background-color: @polar0;
 	color:@frost1;
     border-radius: 0px 24px 24px 0px;
+}
+
+#workspaces button:first-child {
+    border-radius: 24px 0px 0px 24px;
+}
+
+#workspaces button:only-child {
+    border-radius: 24px;
 }
 
 #workspaces button.active {

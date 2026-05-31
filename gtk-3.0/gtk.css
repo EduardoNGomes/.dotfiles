@@ -1,0 +1,79 @@
+@define-color bg #2e3440;
+@define-color bg_alt #3b4252;
+@define-color surface #434c5e;
+@define-color border #4c566a;
+@define-color fg #eceff4;
+@define-color muted #d8dee9;
+@define-color accent #47E4AE;
+@define-color accent_alt #8fbcbb;
+@define-color warning #ebcb8b;
+@define-color error #bf616a;
+
+window,
+dialog,
+popover,
+menu,
+.background {
+  background-color: @bg;
+  color: @fg;
+}
+
+headerbar,
+toolbar,
+menubar,
+notebook > header,
+treeview.view,
+list,
+sidebar,
+.sidebar {
+  background-color: @bg_alt;
+  color: @fg;
+}
+
+entry,
+spinbutton,
+combobox,
+button,
+checkbutton,
+radiobutton,
+switch,
+treeview.view,
+textview text {
+  background-color: @surface;
+  color: @fg;
+  border-color: @border;
+}
+
+button:hover,
+row:hover,
+treeview.view:hover {
+  background-color: @border;
+}
+
+button:checked,
+button:active,
+switch:checked,
+checkbutton:checked,
+radiobutton:checked,
+selection,
+*:selected {
+  background-color: @accent;
+  color: @bg;
+}
+
+label:disabled,
+button:disabled,
+entry:disabled {
+  color: @border;
+}
+
+progressbar progress,
+scale highlight {
+  background-color: @accent;
+}
+
+tooltip {
+  background-color: @bg_alt;
+  color: @fg;
+  border-color: @border;
+}

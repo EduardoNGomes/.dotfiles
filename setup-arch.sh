@@ -197,6 +197,53 @@ ln -s ~/.dotfiles/fontconfig/fonts.conf ~/.config/fontconfig/fonts.conf
 echo "Symlink created for fontconfig."
 fc-cache -fv
 
+# GTK and KDE/Qt app themes
+for gtk_version in gtk-3.0 gtk-4.0; do
+  mkdir -p ~/.config/"$gtk_version"
+  for file in settings.ini gtk.css; do
+    if [ -L ~/.config/"$gtk_version"/"$file" ]; then
+      echo "Removing existing $gtk_version $file symlink..."
+      rm ~/.config/"$gtk_version"/"$file"
+    elif [ -e ~/.config/"$gtk_version"/"$file" ]; then
+      echo "Backing up existing $gtk_version $file..."
+      mv ~/.config/"$gtk_version"/"$file" ~/.config/"$gtk_version"/"$file".backup
+    fi
+    ln -s ~/.dotfiles/"$gtk_version"/"$file" ~/.config/"$gtk_version"/"$file"
+    echo "Symlink created for $gtk_version $file."
+  done
+done
+
+if [ -L ~/.config/kdeglobals ]; then
+  echo "Removing existing kdeglobals symlink..."
+  rm ~/.config/kdeglobals
+elif [ -e ~/.config/kdeglobals ]; then
+  echo "Backing up existing kdeglobals..."
+  mv ~/.config/kdeglobals ~/.config/kdeglobals.backup
+fi
+ln -s ~/.dotfiles/kde/kdeglobals ~/.config/kdeglobals
+echo "Symlink created for kdeglobals."
+
+if [ -L ~/.config/dolphinrc ]; then
+  echo "Removing existing dolphinrc symlink..."
+  rm ~/.config/dolphinrc
+elif [ -e ~/.config/dolphinrc ]; then
+  echo "Backing up existing dolphinrc..."
+  mv ~/.config/dolphinrc ~/.config/dolphinrc.backup
+fi
+ln -s ~/.dotfiles/kde/dolphinrc ~/.config/dolphinrc
+echo "Symlink created for dolphinrc."
+
+mkdir -p ~/.local/share/color-schemes
+if [ -L ~/.local/share/color-schemes/WaybarTerminal.colors ]; then
+  echo "Removing existing WaybarTerminal color scheme symlink..."
+  rm ~/.local/share/color-schemes/WaybarTerminal.colors
+elif [ -e ~/.local/share/color-schemes/WaybarTerminal.colors ]; then
+  echo "Backing up existing WaybarTerminal color scheme..."
+  mv ~/.local/share/color-schemes/WaybarTerminal.colors ~/.local/share/color-schemes/WaybarTerminal.colors.backup
+fi
+ln -s ~/.dotfiles/kde/color-schemes/WaybarTerminal.colors ~/.local/share/color-schemes/WaybarTerminal.colors
+echo "Symlink created for WaybarTerminal color scheme."
+
 # Mycli symlink
 if [ -L ~/.myclirc ]; then
   echo "Removing existing Mycli symlink..."

@@ -1,0 +1,17 @@
+[General]
+ConfirmClosingMultipleTabs=false
+EditableUrl=true
+RememberOpenedTabs=false
+ShowFullPath=true
+Version=202
+ViewPropsTimestamp=2026,5,31,11,20,3.458
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[UiSettings]
+ColorScheme=WaybarTerminal

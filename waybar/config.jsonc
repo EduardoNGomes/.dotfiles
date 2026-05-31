@@ -94,11 +94,11 @@
         "on-click": "nm-connection-editor"
     },
     "bluetooth": {
-        "format": "",
-        "format-connected": " {num_connections}",
-        "format-connected-battery": " {num_connections}",
-        "format-disabled": "",
-        "format-off": "",
+        "format": "󰂯",
+        "format-connected": "󰂱 {num_connections}",
+        "format-connected-battery": "󰂱 {num_connections}",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
         "format-no-controller": "",
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
@@ -204,7 +204,7 @@
         "tooltip": false
     },
     "custom/packages": {
-        "exec": "~/dotfiles/scripts/packages.sh",
+        "exec": "~/.dotfiles/scripts/packages.sh",
         "interval": 1800,
         "return-type": "json",
         "on-click": "pkill -SIGRTMIN+8 waybar"

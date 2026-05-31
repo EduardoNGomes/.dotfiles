@@ -45,6 +45,7 @@ button {
 #temperature,
 #backlight,
 #network,
+#bluetooth,
 #pulseaudio,
 #custom-media,
 #tray,
@@ -127,6 +128,15 @@ button {
 }
 
 #network.disconnected {
+    color: @red;
+}
+
+#bluetooth {
+    color: @frost2;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
     color: @red;
 }
 

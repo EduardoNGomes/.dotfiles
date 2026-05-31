@@ -69,6 +69,28 @@ sudo pacman -S wl-clipboard --noconfirm
 # less
 sudo pacman -S less --noconfirm
 
+# Network and Bluetooth managers
+sudo pacman -S --needed --noconfirm \
+  networkmanager \
+  network-manager-applet \
+  bluez \
+  bluez-utils \
+  blueman
+
+if systemctl is-enabled NetworkManager.service &> /dev/null; then
+  echo "NetworkManager.service is already enabled."
+else
+  sudo systemctl enable NetworkManager.service
+fi
+sudo systemctl start NetworkManager.service
+
+if systemctl is-enabled bluetooth.service &> /dev/null; then
+  echo "bluetooth.service is already enabled."
+else
+  sudo systemctl enable bluetooth.service
+fi
+sudo systemctl start bluetooth.service
+
 # Waybar
 if command -v waybar &> /dev/null; then
   echo "Waybar is already installed."

@@ -42,6 +42,11 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 export EDITOR=vim
 export VISUAL=vim
 
+## SSH_AUTH_SOCK
+if [ -S "$XDG_RUNTIME_DIR/ssh-agent.socket" ]; then
+  export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+fi
+
 
 
 ZSH_THEME="leaf"

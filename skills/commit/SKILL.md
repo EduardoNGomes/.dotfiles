@@ -17,6 +17,7 @@ Cria commits a partir das mudanças no working tree seguindo regras estritas.
    - Descrição no imperativo, em minúsculo, sem ponto final.
 4. **Sempre em inglês.** A mensagem do commit (escopo e descrição) deve ser escrita **sempre em inglês**, independentemente do idioma usado na conversa ou no código.
 5. **Migrations isoladas.** Mudanças em `prisma/` ou em migrations devem **sempre** ficar em um commit separado, nunca misturadas com outras finalidades.
+6. **Lint isolado.** Mudanças que são **apenas** de lint/formatação (ex.: reformatação automática de linter/formatter, ajustes de espaçamento, aspas, ordenação de imports, ponto e vírgula) devem ficar em um commit separado, nunca misturadas com mudanças de lógica/funcionalidade. Use o tipo `style` (formatação que não altera o comportamento do código). Se um arquivo tem **tanto** mudança de lint quanto mudança de lógica, separe os trechos com `git add -p`.
 
 ## Passos
 
@@ -29,10 +30,11 @@ Cria commits a partir das mudanças no working tree seguindo regras estritas.
 
 ## Exemplo
 
-Mudanças: novo endpoint de login + correção de typo no README.
+Mudanças: novo endpoint de login + correção de typo no README + reformatação automática do linter em vários arquivos.
 
-→ Dois commits (mensagens em inglês):
+→ Três commits (mensagens em inglês), com o lint isolado:
 ```
 feat(auth): add login endpoint
 docs: fix typo in readme
+style: apply linter formatting
 ```

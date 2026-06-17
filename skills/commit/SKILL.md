@@ -10,14 +10,15 @@ Cria commits a partir das mudanças no working tree seguindo regras estritas.
 
 ## Regras
 
-1. **Um commit por finalidade.** Analise todas as mudanças (staged e unstaged). Se elas cobrem mais de uma funcionalidade/finalidade distinta, crie **vários commits**, um para cada finalidade — fazendo `git add` apenas dos arquivos (ou trechos) daquela finalidade antes de cada commit.
-2. **Sem body.** A mensagem é apenas a linha de assunto (subject). Nunca adicione corpo, rodapé, nem `Co-Authored-By`.
-3. **Conventional Commits.** Formato: `<tipo>(<escopo opcional>): <descrição>`
+1. **Nunca commite na `main`/`master`.** Antes de qualquer coisa, rode `git branch --show-current`. Se estiver na branch padrão (`main` ou `master`), **pare e avise o usuário** — não commite. Sugira criar/trocar para uma branch de trabalho antes (ex.: `git switch -c <branch>`) e siga só após confirmação.
+2. **Um commit por finalidade.** Analise todas as mudanças (staged e unstaged). Se elas cobrem mais de uma funcionalidade/finalidade distinta, crie **vários commits**, um para cada finalidade — fazendo `git add` apenas dos arquivos (ou trechos) daquela finalidade antes de cada commit.
+3. **Sem body.** A mensagem é apenas a linha de assunto (subject). Nunca adicione corpo, rodapé, nem `Co-Authored-By`.
+4. **Conventional Commits.** Formato: `<tipo>(<escopo opcional>): <descrição>`
    - Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
    - Descrição no imperativo, em minúsculo, sem ponto final.
-4. **Sempre em inglês.** A mensagem do commit (escopo e descrição) deve ser escrita **sempre em inglês**, independentemente do idioma usado na conversa ou no código.
-5. **Migrations isoladas.** Mudanças em `prisma/` ou em migrations devem **sempre** ficar em um commit separado, nunca misturadas com outras finalidades.
-6. **Lint isolado.** Mudanças que são **apenas** de lint/formatação (ex.: reformatação automática de linter/formatter, ajustes de espaçamento, aspas, ordenação de imports, ponto e vírgula) devem ficar em um commit separado, nunca misturadas com mudanças de lógica/funcionalidade. Use o tipo `style` (formatação que não altera o comportamento do código). Se um arquivo tem **tanto** mudança de lint quanto mudança de lógica, separe os trechos com `git add -p`.
+5. **Sempre em inglês.** A mensagem do commit (escopo e descrição) deve ser escrita **sempre em inglês**, independentemente do idioma usado na conversa ou no código.
+6. **Migrations isoladas.** Mudanças em `prisma/` ou em migrations devem **sempre** ficar em um commit separado, nunca misturadas com outras finalidades.
+7. **Lint isolado.** Mudanças que são **apenas** de lint/formatação (ex.: reformatação automática de linter/formatter, ajustes de espaçamento, aspas, ordenação de imports, ponto e vírgula) devem ficar em um commit separado, nunca misturadas com mudanças de lógica/funcionalidade. Use o tipo `style` (formatação que não altera o comportamento do código). Se um arquivo tem **tanto** mudança de lint quanto mudança de lógica, separe os trechos com `git add -p`.
 
 ## Passos
 

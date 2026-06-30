@@ -91,6 +91,13 @@ else
 fi
 sudo systemctl start bluetooth.service
 
+# Audio control GUI (pavucontrol) — switch output between headphones/HDMI/etc
+if command -v pavucontrol &> /dev/null; then
+  echo "pavucontrol is already installed."
+else
+  sudo pacman -S pavucontrol --noconfirm
+fi
+
 # Waybar
 if command -v waybar &> /dev/null; then
   echo "Waybar is already installed."
@@ -325,6 +332,14 @@ else
     echo "Installing Yay..."
     # Usando subshell () para garantir que o script não se perca de pasta
     (sudo pacman -S --needed git base-devel --noconfirm && git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si --noconfirm)
+fi
+
+# Tokyonight GTK theme — required by GTK_THEME=Tokyonight-Dark (hypr env + gtk-3.0/4.0 settings).
+# Without it, GTK apps (e.g. pavucontrol) fall back to a broken light theme with washed-out text.
+if [ -d /usr/share/themes/Tokyonight-Dark ]; then
+  echo "Tokyonight GTK theme is already installed."
+else
+  yay -S tokyonight-gtk-theme-git --noconfirm
 fi
 
 # awww

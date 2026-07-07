@@ -326,12 +326,31 @@ else
 fi
 
 # Yay
-if command -v yay &> /dev/null; then
-  echo "Yay is already installed."
+if pacman -Q yay-bin &> /dev/null; then
+  echo "Yay prebuilt is already installed."
+elif command -v yay &> /dev/null; then
+  echo "Switching Yay to the prebuilt package..."
+  if ! yay -S yay-bin --noconfirm; then
+    yay_bin_pkg=(~/.cache/yay/yay-bin/yay-bin-[0-9]*-x86_64.pkg.tar.zst)
+    if [ -f "${yay_bin_pkg[0]}" ]; then
+      for old_pkg in yay yay-debug; do
+        if pacman -Q "$old_pkg" &> /dev/null; then
+          sudo pacman -R --noconfirm "$old_pkg"
+        fi
+      done
+      sudo pacman -U --noconfirm "${yay_bin_pkg[0]}"
+    else
+      exit 1
+    fi
+  fi
 else
-    echo "Installing Yay..."
+    echo "Installing Yay prebuilt..."
     # Usando subshell () para garantir que o script não se perca de pasta
-    (sudo pacman -S --needed git base-devel --noconfirm && git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si --noconfirm)
+    (sudo pacman -S --needed git base-devel --noconfirm && git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && cd /tmp/yay-bin && makepkg -si --noconfirm)
+fi
+if pacman -Q yay-bin &> /dev/null && pacman -Q yay-debug &> /dev/null; then
+  echo "Removing old Yay debug package from the source build..."
+  sudo pacman -R --noconfirm yay-debug
 fi
 
 # Tokyonight GTK theme — required by GTK_THEME=Tokyonight-Dark (hypr env + gtk-3.0/4.0 settings).
@@ -371,10 +390,26 @@ else
 fi
 
 # Vicinae
-if command -v vicinae &> /dev/null; then
-  echo "Vicinae is already installed."
+if pacman -Q vicinae-bin &> /dev/null; then
+  echo "Vicinae prebuilt is already installed."
 else
-  yay -S vicinae --noconfirm
+  if ! yay -S vicinae-bin --noconfirm; then
+    vicinae_bin_pkg=(~/.cache/yay/vicinae-bin/vicinae-bin-[0-9]*-x86_64.pkg.tar.zst)
+    if [ -f "${vicinae_bin_pkg[0]}" ]; then
+      for old_pkg in vicinae vicinae-debug; do
+        if pacman -Q "$old_pkg" &> /dev/null; then
+          sudo pacman -R --noconfirm "$old_pkg"
+        fi
+      done
+      sudo pacman -U --noconfirm "${vicinae_bin_pkg[0]}"
+    else
+      exit 1
+    fi
+  fi
+fi
+if pacman -Q vicinae-bin &> /dev/null && pacman -Q vicinae-debug &> /dev/null; then
+  echo "Removing old Vicinae debug package from the source build..."
+  sudo pacman -R --noconfirm vicinae-debug
 fi
 
 # Garoa

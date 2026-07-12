@@ -220,6 +220,10 @@ for gtk_version in gtk-3.0 gtk-4.0; do
   done
 done
 
+# Advertise the dark color preference to browsers and websites.
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+echo "System color scheme set to dark."
+
 if [ -L ~/.config/kdeglobals ]; then
   echo "Removing existing kdeglobals symlink..."
   rm ~/.config/kdeglobals

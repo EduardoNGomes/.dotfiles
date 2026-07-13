@@ -416,6 +416,17 @@ if pacman -Q vicinae-bin &> /dev/null && pacman -Q vicinae-debug &> /dev/null; t
   sudo pacman -R --noconfirm vicinae-debug
 fi
 
+mkdir -p ~/.local/share/vicinae/themes
+if [ -L ~/.local/share/vicinae/themes/dotfiles-nord.toml ]; then
+  rm ~/.local/share/vicinae/themes/dotfiles-nord.toml
+elif [ -e ~/.local/share/vicinae/themes/dotfiles-nord.toml ]; then
+  mv ~/.local/share/vicinae/themes/dotfiles-nord.toml ~/.local/share/vicinae/themes/dotfiles-nord.toml.backup
+fi
+ln -s ~/.dotfiles/vicinae/dotfiles-nord.toml ~/.local/share/vicinae/themes/dotfiles-nord.toml
+echo "Symlink created for the Vicinae Dotfiles Nord theme."
+
+vicinae theme set dotfiles-nord
+
 # Garoa
 if command -v garoa &> /dev/null; then
   echo "Garoa is already installed."

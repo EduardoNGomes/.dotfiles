@@ -1,0 +1,76 @@
+[meta]
+version = 1
+name = "Dotfiles Nord"
+description = "Nord palette used by Waybar, Dunst, Fcitx5 and KDE"
+variant = "dark"
+inherits = "vicinae-dark"
+
+[colors.core]
+background = "#2e3440"
+foreground = "#eceff4"
+secondary_background = "#3b4252"
+border = "#434c5e"
+accent = "#47e4ae"
+accent_foreground = "#2e3440"
+
+[colors.main_window]
+border = "#434c5e"
+footer = { background = "#3b4252" }
+
+[colors.settings_window]
+border = "#434c5e"
+
+[colors.accents]
+blue = "#81a1c1"
+green = "#47e4ae"
+magenta = "#b48ead"
+orange = "#d08770"
+purple = "#b48ead"
+red = "#bf616a"
+yellow = "#ebcb8b"
+cyan = "#8fbcbb"
+
+[colors.text]
+default = "#eceff4"
+muted = "#d8dee9"
+danger = "#bf616a"
+success = "#47e4ae"
+placeholder = "#81a1c1"
+selection = { background = "#47e4ae", foreground = "#2e3440" }
+
+[colors.text.links]
+default = "#8fbcbb"
+visited = "#b48ead"
+
+[colors.input]
+border = "#434c5e"
+border_focus = "#47e4ae"
+border_error = "#bf616a"
+
+[colors.button.primary]
+background = "#434c5e"
+foreground = "#eceff4"
+hover = { background = "#4c566a" }
+focus = { outline = "#47e4ae" }
+
+[colors.list.item.hover]
+foreground = "#eceff4"
+secondary_foreground = "#d8dee9"
+
+[colors.list.item.selection]
+background = "#434c5e"
+foreground = "#eceff4"
+secondary_background = "#4c566a"
+secondary_foreground = "#eceff4"
+
+[colors.grid.item]
+background = "#3b4252"
+hover = { outline = "#47e4ae" }
+selection = { outline = "#47e4ae" }
+
+[colors.scrollbars]
+background = "#4c566a"
+
+[colors.loading]
+bar = "#47e4ae"
+spinner = "#eceff4"

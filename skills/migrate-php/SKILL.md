@@ -13,6 +13,30 @@ Este agente é o responsável **exclusivo** por criar e orientar a execução/va
 
 ---
 
+## ⚠️ Phinx é SÓ validação local — não commite, não abra PR
+
+O Phinx roda apenas no ambiente local (docker), num único banco. **Ele está desativado em produção.** A migration criada aqui é **scratch de validação**: serve para provar que o SQL funciona antes de mandar algo para ~3000 bancos de clientes.
+
+| | Phinx (esta skill) | `waid-clients-db-migrations` |
+|---|---|---|
+| Para que serve | **validar localmente** | **produção** |
+| Onde roda | docker local, 1 banco | **~3000 bancos de clientes, 4 clusters** |
+| Chega no cliente | ❌ **não** | ✅ **sim** |
+| **Commit** | ❌ **nunca** | ✅ sim |
+| **PR** | ❌ **nunca** | ✅ sim, para a `main` |
+| `down()` | obrigatório | não existe — roll-forward only |
+| Idempotência | não crítica | **obrigatória** (os bancos driftaram) |
+| Nome do arquivo | `AddNewLessonPublishType` | `<timestamp UTC>_snake_case.sql` |
+| Bloco de impacto | — | **obrigatório no PR** |
+
+**O arquivo desta skill não é versionado.** Ele vai aparecer como untracked no `git status` do `curseduca-master` — deixe assim. Não rode `git add` nele, não inclua em commit, não abra PR.
+
+**Criar só a do Phinx = a mudança nunca chega no cliente.** Ela funciona no seu ambiente e não existe em produção — falha silenciosa, descoberta semanas depois.
+
+Depois de validar aqui, use a skill `waid-migration` para escrever a contraparte. As duas precisam ser semanticamente equivalentes, mas **não são o mesmo arquivo copiado**: a versão de produção é idempotente, sem `down()`, com `ALGORITHM`/`LOCK` explícitos e classificada por risco.
+
+---
+
 ## Criar Migration
 
 ### Comando
@@ -61,6 +85,10 @@ docker exec curseduca_app php ./curseduca-master/bin/phinx.php migrate
 ```
 
 > Isso garante que o `down()` funciona corretamente e que o banco volta a migrar sem problemas.
+
+4) **Criar a contraparte em `waid-clients-db-migrations`** — obrigatório, senão a mudança fica só no seu ambiente. Use a skill `waid-migration`.
+
+A tarefa **não está concluída** enquanto essa contraparte não existir. Se você validou o Phinx e parou aí, avise explicitamente ao usuário que a migration de produção ainda falta.
 
 ---
 

@@ -17,7 +17,12 @@ Cria commits a partir das mudanças no working tree seguindo regras estritas.
    - Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`
    - Descrição no imperativo, em minúsculo, sem ponto final.
 5. **Sempre em inglês.** A mensagem do commit (escopo e descrição) deve ser escrita **sempre em inglês**, independentemente do idioma usado na conversa ou no código.
-6. **Migrations isoladas.** Mudanças em `prisma/` ou em migrations devem **sempre** ficar em um commit separado, nunca misturadas com outras finalidades.
+6. **Migrations isoladas — uma por commit.** Mudanças em `prisma/`, `migrations/` ou qualquer migration de banco devem **sempre** ficar em commit separado, nunca misturadas com outras finalidades. Além disso:
+   - **Um arquivo de migration por commit.** Duas migrations no mesmo commit não podem ser revertidas nem revisadas separadamente.
+   - **Nunca reutilize o nome de um arquivo de migration já existente ou já removido.** O rastreamento é pela string do nome, sem checksum — um nome repetido pula nos bancos que já o registraram e roda nos outros, ficando meio aplicado. Se estiver recriando algo removido, gere timestamp novo.
+   - A descrição deve dizer o que muda **no banco**, não no código: `fix(migrations): widen lesson ord column to smallint`, não `fix(migrations): update file`.
+   - Se for o repo `waid-clients-db-migrations`, use a skill `waid-migration` antes de escrever a migration.
+   - **NUNCA commite migration do Phinx.** Arquivos em `curseduca-master/utils/db/migrations/` são scratch de **validação local** — o Phinx está desativado em produção. Se aparecerem no `git status`, **deixe fora do commit** e diga ao usuário que foram ignorados de propósito. A migration que vai para produção é a do repo `waid-clients-db-migrations`, criada em par (skill `waid-migration`).
 7. **Lint isolado.** Mudanças que são **apenas** de lint/formatação (ex.: reformatação automática de linter/formatter, ajustes de espaçamento, aspas, ordenação de imports, ponto e vírgula) devem ficar em um commit separado, nunca misturadas com mudanças de lógica/funcionalidade. Use o tipo `style` (formatação que não altera o comportamento do código). Se um arquivo tem **tanto** mudança de lint quanto mudança de lógica, separe os trechos com `git add -p`.
 
 ## Passos

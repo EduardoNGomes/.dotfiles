@@ -1,107 +1,413 @@
 local M = {}
 
-local colors = {
-	background = "#191A20",
-	foreground = "#9D9AB1",
-	cursor = "#F4AFD2",
-	selection = "#2F313C",
-	line_highlight = "#2F313C",
-	-- Syntax
+M.palette = {
+	bg = "#191A20",
+	bg_dark = "#131418",
+	bg_float = "#202128",
+	bg_highlight = "#2F313C",
+	border = "#38374E",
+	fg = "#F6F6F4",
+	fg_bright = "#FFFFFF",
+	fg_muted = "#9D9AB1",
 	comment = "#7E8392",
-	keyword = "#F65454",
-	function_name = "#13FBA7",
-	variable = "#FFFFFF",
-	string = "#FFEB81",
-	constant = "#C678DD",
-	type = "#73F9F1",
-	operator = "#ABB2BF",
-	error = "#F65454",
-	warning = "#E5C07B",
-
-	-- Git
-	git_add = "#98C379",
-	git_change = "#E5C07B",
-	git_delete = "#E06C75",
-
-	-- Custom Colors for Specific Needs
-	function_call = "#98C379",
-	object_reference = "#C678DD",
-
-	-- New colors for specific needs
-	brackets = "#FCC42E",
-	arguments = "#F38D3A",
-	operator_signals = "#F26B71",
-	escapes = "#CE80D9",
+	dim = "#5D627A",
+	pink = "#F4AFD2",
+	red = "#F65454",
+	coral = "#FF5F72",
+	green = "#13FBA7",
+	yellow = "#FFEB81",
+	gold = "#FCC42E",
+	cyan = "#73F9F1",
+	orange = "#FB9D46",
+	purple = "#E777FA",
+	blue = "#57A0FD",
+	error = "#F9215D",
+	warning = "#D9B823",
+	info = "#75BEFF",
+	hint = "#21D3FF",
 }
 
-local function apply_highlights()
-	local highlight = vim.api.nvim_set_hl
+local defaults = {
+	transparent = false,
+	terminal_colors = true,
+	styles = {
+		comments = { italic = false },
+		keywords = {},
+		functions = {},
+		parameters = { italic = true },
+		types = { italic = true },
+	},
+}
 
-	highlight(0, "Normal", { bg = "none", fg = colors.foreground })
-	highlight(0, "NormalFloat", { bg = "none" })
+local function groups(options)
+	local c = M.palette
+	local bg = options.transparent and "NONE" or c.bg
+	local bg_dark = options.transparent and "NONE" or c.bg_dark
 
-	highlight(0, "Comment", { fg = colors.comment, italic = true })
-	highlight(0, "Keyword", { fg = colors.keyword, italic = true })
-	highlight(0, "Function", { fg = colors.function_name, bold = true })
-	highlight(0, "Variable", { fg = colors.variable })
-	highlight(0, "String", { fg = colors.string })
-	highlight(0, "Constant", { fg = colors.constant })
-	highlight(0, "Type", { fg = colors.type, bold = true })
-	highlight(0, "Operator", { fg = colors.operator })
-	highlight(0, "Error", { fg = colors.error, bold = true })
-	highlight(0, "Warning", { fg = colors.warning })
+	return {
+		-- Editor UI
+		Normal = { fg = c.fg, bg = bg },
+		NormalNC = { fg = c.fg, bg = bg },
+		NormalFloat = { fg = c.fg_muted, bg = options.transparent and "NONE" or c.bg_float },
+		FloatBorder = { fg = c.border, bg = options.transparent and "NONE" or c.bg_float },
+		FloatTitle = { fg = c.pink, bg = options.transparent and "NONE" or c.bg_float, bold = true },
+		ColorColumn = { bg = c.bg_dark },
+		Conceal = { fg = c.comment },
+		Cursor = { fg = c.bg, bg = c.pink },
+		lCursor = { link = "Cursor" },
+		CursorIM = { link = "Cursor" },
+		CursorColumn = { bg = c.bg_highlight },
+		CursorLine = { bg = c.bg_highlight },
+		CursorLineNr = { fg = c.fg_bright, bg = c.bg_highlight, bold = true },
+		Directory = { fg = c.cyan },
+		EndOfBuffer = { fg = c.bg },
+		ErrorMsg = { fg = c.error, bold = true },
+		WinSeparator = { fg = c.border },
+		Folded = { fg = c.comment, bg = c.bg_highlight },
+		FoldColumn = { fg = c.fg_muted, bg = bg },
+		SignColumn = { fg = c.fg_muted, bg = bg },
+		IncSearch = { fg = c.bg, bg = c.orange, bold = true },
+		CurSearch = { fg = c.bg, bg = c.pink, bold = true },
+		Search = { fg = c.fg_bright, bg = c.bg_highlight },
+		Substitute = { fg = c.bg, bg = c.coral },
+		LineNr = { fg = c.fg_muted },
+		LineNrAbove = { fg = c.fg_muted },
+		LineNrBelow = { fg = c.fg_muted },
+		MatchParen = { fg = c.pink, bg = c.bg_highlight, bold = true },
+		ModeMsg = { fg = c.green, bold = true },
+		MoreMsg = { fg = c.green },
+		NonText = { fg = c.dim },
+		Pmenu = { fg = c.fg_muted, bg = c.bg_float },
+		PmenuSel = { fg = c.fg_bright, bg = c.bg_highlight, bold = true },
+		PmenuKind = { fg = c.cyan, bg = c.bg_float },
+		PmenuKindSel = { fg = c.cyan, bg = c.bg_highlight },
+		PmenuExtra = { fg = c.comment, bg = c.bg_float },
+		PmenuExtraSel = { fg = c.comment, bg = c.bg_highlight },
+		PmenuSbar = { bg = c.bg_dark },
+		PmenuThumb = { bg = c.pink },
+		Question = { fg = c.cyan },
+		QuickFixLine = { fg = c.pink, bg = c.bg_highlight, bold = true },
+		SpecialKey = { fg = c.dim },
+		SpellBad = { undercurl = true, sp = c.error },
+		SpellCap = { undercurl = true, sp = c.warning },
+		SpellLocal = { undercurl = true, sp = c.info },
+		SpellRare = { undercurl = true, sp = c.purple },
+		StatusLine = { fg = c.fg_muted, bg = bg_dark },
+		StatusLineNC = { fg = c.comment, bg = bg_dark },
+		TabLine = { fg = c.fg_muted, bg = bg_dark },
+		TabLineFill = { fg = c.border, bg = bg_dark },
+		TabLineSel = { fg = c.fg_bright, bg = bg, bold = true, underline = true, sp = c.pink },
+		Title = { fg = c.pink, bold = true },
+		Visual = { bg = c.bg_highlight },
+		VisualNOS = { bg = c.bg_highlight },
+		WarningMsg = { fg = c.warning, bold = true },
+		Whitespace = { fg = c.dim },
+		WildMenu = { fg = c.bg, bg = c.pink },
+		WinBar = { fg = c.fg_muted, bg = bg },
+		WinBarNC = { fg = c.comment, bg = bg },
+		MsgArea = { fg = c.fg_muted },
+		MsgSeparator = { fg = c.border },
 
-	-- Linhas e números
-	highlight(0, "CursorLine", { bg = colors.line_highlight })
-	highlight(0, "CursorLineNr", { fg = colors.foreground, bold = true })
-	highlight(0, "LineNr", { fg = colors.comment })
-	highlight(0, "Visual", { bg = colors.selection })
-	-- Git
-	highlight(0, "GitSignsAdd", { fg = colors.git_add })
-	highlight(0, "GitSignsChange", { fg = colors.git_change })
-	highlight(0, "GitSignsDelete", { fg = colors.git_delete })
+		-- Vim syntax
+		Comment = vim.tbl_extend("force", { fg = c.comment }, options.styles.comments),
+		Constant = { fg = c.purple },
+		String = { fg = c.yellow },
+		Character = { fg = c.yellow },
+		Number = { fg = c.purple },
+		Boolean = { fg = c.purple },
+		Float = { fg = c.purple },
+		Identifier = { fg = c.fg },
+		Function = vim.tbl_extend("force", { fg = c.green }, options.styles.functions),
+		Statement = { fg = c.coral },
+		Conditional = { fg = c.coral },
+		Repeat = { fg = c.coral },
+		Label = { fg = c.coral },
+		Operator = { fg = c.coral },
+		Keyword = vim.tbl_extend("force", { fg = c.coral }, options.styles.keywords),
+		Exception = { fg = c.coral },
+		PreProc = { fg = c.coral },
+		Include = { fg = c.coral },
+		Define = { fg = c.coral },
+		Macro = { fg = c.coral },
+		PreCondit = { fg = c.coral },
+		Type = vim.tbl_extend("force", { fg = c.cyan }, options.styles.types),
+		StorageClass = { fg = c.coral },
+		Structure = { fg = c.cyan, italic = true },
+		Typedef = { fg = c.cyan, italic = true },
+		Special = { fg = c.coral },
+		SpecialChar = { fg = c.coral },
+		Tag = { fg = c.coral },
+		Delimiter = { fg = c.coral },
+		SpecialComment = { fg = c.coral },
+		Debug = { fg = c.red },
+		Underlined = { fg = c.cyan, underline = true },
+		Ignore = { fg = c.dim },
+		Error = { fg = c.error, underline = true },
+		Todo = { fg = c.bg, bg = c.yellow, bold = true },
+		Added = { fg = c.green },
+		Changed = { fg = c.orange },
+		Removed = { fg = c.red },
 
-	-- Treesitter highlights for better Go, JavaScript, and TypeScript support
-	highlight(0, "@keyword", { fg = colors.keyword })
-	highlight(0, "@namespace", { fg = colors.type })
-	highlight(0, "@variable", { fg = colors.variable })
-	highlight(0, "@function", { fg = colors.function_name, bold = true })
-	highlight(0, "@function.builtin", { fg = "#F65454" })
-	highlight(0, "@function.call", { fg = colors.function_call })
-	highlight(0, "@parameter", { fg = "#FB9D46" })
-	highlight(0, "@number", { fg = colors.constant })
-	highlight(0, "@type", { fg = colors.type, bold = true })
-	highlight(0, "@type.builtin", { fg = "#73F9F1" })
-	highlight(0, "@string", { fg = colors.string })
-	highlight(0, "@operator", { fg = colors.operator })
-	highlight(0, "@comment", { fg = colors.comment, italic = true })
-	highlight(0, "@field", { fg = colors.variable })
-	highlight(0, "@attribute", { fg = colors.type })
-	highlight(0, "@decorator", { fg = colors.function_name, italic = true })
-	highlight(0, "@variable.builtin", { fg = colors.object_reference })
+		-- Treesitter
+		["@comment"] = { link = "Comment" },
+		["@comment.documentation"] = { fg = c.comment },
+		["@comment.error"] = { fg = c.error, bold = true },
+		["@comment.warning"] = { fg = c.warning, bold = true },
+		["@comment.todo"] = { fg = c.bg, bg = c.yellow, bold = true },
+		["@comment.note"] = { fg = c.bg, bg = c.info, bold = true },
+		["@constant"] = { fg = c.purple },
+		["@constant.builtin"] = { fg = c.purple, italic = true },
+		["@constant.macro"] = { fg = c.purple },
+		["@string"] = { fg = c.yellow },
+		["@string.documentation"] = { fg = c.comment },
+		["@string.regexp"] = { fg = c.yellow },
+		["@string.escape"] = { fg = c.coral },
+		["@string.special"] = { fg = c.coral },
+		["@string.special.path"] = { fg = c.yellow },
+		["@string.special.symbol"] = { fg = c.purple },
+		["@string.special.url"] = { fg = c.cyan, underline = true },
+		["@character"] = { fg = c.yellow },
+		["@character.printf"] = { fg = c.purple },
+		["@character.special"] = { fg = c.coral },
+		["@boolean"] = { fg = c.purple },
+		["@number"] = { fg = c.purple },
+		["@number.float"] = { fg = c.purple },
+		["@variable"] = { fg = c.fg },
+		["@variable.builtin"] = { fg = c.purple, italic = true },
+		["@variable.parameter"] = vim.tbl_extend("force", { fg = c.orange }, options.styles.parameters),
+		["@variable.parameter.builtin"] = { fg = c.orange, italic = true },
+		["@variable.member"] = { fg = c.fg },
+		["@module"] = { fg = c.cyan },
+		["@module.builtin"] = { fg = c.cyan, italic = true },
+		["@label"] = { fg = c.coral },
+		["@attribute"] = { fg = c.green, italic = true },
+		["@property"] = { fg = c.fg },
+		["@function"] = { fg = c.green },
+		["@function.builtin"] = { fg = c.cyan, italic = true },
+		["@function.call"] = { fg = c.green },
+		["@function.macro"] = { fg = c.green },
+		["@function.method"] = { fg = c.green },
+		["@function.method.call"] = { fg = c.green },
+		["@constructor"] = { fg = c.cyan },
+		["@operator"] = { fg = c.coral },
+		["@keyword"] = { fg = c.coral },
+		["@keyword.coroutine"] = { fg = c.coral },
+		["@keyword.function"] = { fg = c.coral },
+		["@keyword.operator"] = { fg = c.coral },
+		["@keyword.import"] = { fg = c.coral },
+		["@keyword.type"] = { fg = c.coral },
+		["@keyword.modifier"] = { fg = c.coral },
+		["@keyword.repeat"] = { fg = c.coral },
+		["@keyword.return"] = { fg = c.coral },
+		["@keyword.debug"] = { fg = c.red },
+		["@keyword.exception"] = { fg = c.coral },
+		["@keyword.conditional"] = { fg = c.coral },
+		["@keyword.conditional.ternary"] = { fg = c.coral },
+		["@keyword.directive"] = { fg = c.coral },
+		["@keyword.directive.define"] = { fg = c.coral },
+		["@punctuation.delimiter"] = { fg = c.coral },
+		["@punctuation.bracket"] = { fg = c.fg },
+		["@punctuation.special"] = { fg = c.coral },
+		["@type"] = { fg = c.cyan, italic = true },
+		["@type.builtin"] = { fg = c.cyan, italic = true },
+		["@type.definition"] = { fg = c.cyan, italic = true },
+		["@type.qualifier"] = { fg = c.coral },
+		["@tag"] = { fg = c.coral },
+		["@tag.attribute"] = { fg = c.green, italic = true },
+		["@tag.delimiter"] = { fg = c.coral },
+		["@markup.strong"] = { fg = c.orange, bold = true },
+		["@markup.italic"] = { fg = c.yellow, italic = true },
+		["@markup.strikethrough"] = { strikethrough = true },
+		["@markup.underline"] = { underline = true },
+		["@markup.heading"] = { fg = c.purple, bold = true },
+		["@markup.quote"] = { fg = c.yellow, italic = true },
+		["@markup.math"] = { fg = c.purple },
+		["@markup.link"] = { fg = c.cyan },
+		["@markup.link.label"] = { fg = c.coral },
+		["@markup.link.url"] = { fg = c.cyan, underline = true },
+		["@markup.raw"] = { fg = c.green },
+		["@markup.raw.block"] = { fg = c.green },
+		["@markup.list"] = { fg = c.cyan },
+		["@diff.plus"] = { fg = c.green },
+		["@diff.minus"] = { fg = c.red },
+		["@diff.delta"] = { fg = c.orange },
+		RainbowDelimiterYellow = { fg = c.gold },
+		RainbowDelimiterViolet = { fg = c.purple },
+		RainbowDelimiterCyan = { fg = c.cyan },
+		RainbowDelimiterOrange = { fg = c.orange },
+		RainbowDelimiterGreen = { fg = c.green },
+		RainbowDelimiterBlue = { fg = c.blue },
+		RainbowDelimiterRed = { fg = c.coral },
 
-	-- Custom syntax highlighting rules
-	highlight(0, "@punctuation.brackets", { fg = colors.brackets })
-	highlight(0, "@parameter", { fg = colors.arguments })
-	highlight(0, "@operator", { fg = colors.operator_signals })
-	highlight(0, "@string.escape", { fg = colors.escapes })
-	highlight(0, "@string.special", { fg = colors.escapes })
-	highlight(0, "@string.special.symbol", { fg = colors.escapes })
+		-- Legacy Treesitter capture names
+		["@namespace"] = { link = "@module" },
+		["@parameter"] = { link = "@variable.parameter" },
+		["@field"] = { link = "@variable.member" },
+		["@method"] = { link = "@function.method" },
+		["@method.call"] = { link = "@function.method.call" },
+		["@text"] = { fg = c.fg },
+		["@text.title"] = { link = "@markup.heading" },
+		["@text.literal"] = { link = "@markup.raw" },
+		["@text.uri"] = { link = "@markup.link.url" },
+
+		-- LSP semantic tokens and diagnostics
+		["@lsp.type.class"] = { link = "@type" },
+		["@lsp.type.decorator"] = { link = "@attribute" },
+		["@lsp.type.enum"] = { link = "@type" },
+		["@lsp.type.enumMember"] = { link = "@constant" },
+		["@lsp.type.function"] = { link = "@function" },
+		["@lsp.type.interface"] = { link = "@type" },
+		["@lsp.type.macro"] = { link = "@function.macro" },
+		["@lsp.type.method"] = { link = "@function.method" },
+		["@lsp.type.namespace"] = { link = "@module" },
+		["@lsp.type.parameter"] = { link = "@variable.parameter" },
+		["@lsp.type.property"] = { link = "@property" },
+		["@lsp.type.struct"] = { link = "@type" },
+		["@lsp.type.type"] = { link = "@type" },
+		["@lsp.type.typeParameter"] = { fg = c.orange, italic = true },
+		["@lsp.type.variable"] = { link = "@variable" },
+		["@lsp.mod.deprecated"] = { strikethrough = true },
+		DiagnosticError = { fg = c.error },
+		DiagnosticWarn = { fg = c.warning },
+		DiagnosticInfo = { fg = c.info },
+		DiagnosticHint = { fg = c.hint },
+		DiagnosticOk = { fg = c.green },
+		DiagnosticUnderlineError = { undercurl = true, sp = c.error },
+		DiagnosticUnderlineWarn = { undercurl = true, sp = c.warning },
+		DiagnosticUnderlineInfo = { undercurl = true, sp = c.info },
+		DiagnosticUnderlineHint = { undercurl = true, sp = c.hint },
+		DiagnosticVirtualTextError = { fg = c.error, bg = c.bg_highlight },
+		DiagnosticVirtualTextWarn = { fg = c.warning, bg = c.bg_highlight },
+		DiagnosticVirtualTextInfo = { fg = c.info, bg = c.bg_highlight },
+		DiagnosticVirtualTextHint = { fg = c.hint, bg = c.bg_highlight },
+		DiagnosticFloatingError = { fg = c.error },
+		DiagnosticFloatingWarn = { fg = c.warning },
+		DiagnosticFloatingInfo = { fg = c.info },
+		DiagnosticFloatingHint = { fg = c.hint },
+
+		-- Diff and Git
+		DiffAdd = { fg = c.green, bg = "#18352D" },
+		DiffChange = { fg = c.orange, bg = "#353025" },
+		DiffDelete = { fg = c.red, bg = "#3A2229" },
+		DiffText = { fg = c.fg_bright, bg = "#51452B", bold = true },
+		GitSignsAdd = { fg = c.green },
+		GitSignsChange = { fg = c.blue },
+		GitSignsDelete = { fg = c.pink },
+		GitSignsCurrentLineBlame = { fg = c.comment, italic = true },
+
+		-- Telescope
+		TelescopeNormal = { fg = c.fg_muted, bg = options.transparent and "NONE" or c.bg_dark },
+		TelescopeBorder = { fg = c.border, bg = options.transparent and "NONE" or c.bg_dark },
+		TelescopePromptNormal = { fg = c.fg, bg = options.transparent and "NONE" or c.bg_float },
+		TelescopePromptBorder = { fg = c.pink, bg = options.transparent and "NONE" or c.bg_float },
+		TelescopePromptTitle = { fg = c.bg, bg = c.pink, bold = true },
+		TelescopePreviewTitle = { fg = c.bg, bg = c.green, bold = true },
+		TelescopeResultsTitle = { fg = c.bg, bg = c.cyan, bold = true },
+		TelescopeSelection = { fg = c.fg_bright, bg = c.bg_highlight, bold = true },
+		TelescopeSelectionCaret = { fg = c.pink, bg = c.bg_highlight },
+		TelescopeMatching = { fg = c.pink, bold = true },
+
+		-- nvim-tree
+		NvimTreeNormal = { fg = c.fg_muted, bg = bg_dark },
+		NvimTreeNormalNC = { fg = c.fg_muted, bg = bg_dark },
+		NvimTreeEndOfBuffer = { fg = options.transparent and c.bg or c.bg_dark, bg = bg_dark },
+		NvimTreeWinSeparator = { fg = c.border, bg = bg_dark },
+		NvimTreeRootFolder = { fg = c.pink, bold = true },
+		NvimTreeFolderName = { fg = c.cyan },
+		NvimTreeOpenedFolderName = { fg = c.cyan, bold = true },
+		NvimTreeFolderIcon = { fg = c.pink },
+		NvimTreeExecFile = { fg = c.green, bold = true },
+		NvimTreeSpecialFile = { fg = c.yellow },
+		NvimTreeGitDirty = { fg = c.orange },
+		NvimTreeGitNew = { fg = c.green },
+		NvimTreeGitDeleted = { fg = c.red },
+		NvimTreeIndentMarker = { fg = c.border },
+		NvimTreeCursorLine = { bg = c.bg_highlight },
+
+		-- Completion and common plugins
+		CmpItemAbbr = { fg = c.fg_muted },
+		CmpItemAbbrDeprecated = { fg = c.dim, strikethrough = true },
+		CmpItemAbbrMatch = { fg = c.pink, bold = true },
+		CmpItemAbbrMatchFuzzy = { fg = c.pink },
+		CmpItemKind = { fg = c.cyan },
+		CmpItemMenu = { fg = c.comment },
+		LspReferenceText = { bg = c.bg_highlight },
+		LspReferenceRead = { bg = c.bg_highlight },
+		LspReferenceWrite = { bg = c.bg_highlight, underline = true },
+		LspInlayHint = { fg = c.comment, bg = c.bg_dark, italic = true },
+		WhichKey = { fg = c.pink },
+		WhichKeyGroup = { fg = c.cyan },
+		WhichKeyDesc = { fg = c.fg },
+		WhichKeySeparator = { fg = c.comment },
+		WhichKeyFloat = { bg = options.transparent and "NONE" or c.bg_float },
+		IndentBlanklineChar = { fg = c.border },
+		IndentBlanklineContextChar = { fg = c.pink },
+		IblIndent = { fg = c.border },
+		IblScope = { fg = c.pink },
+		TreesitterContext = { bg = c.bg_dark },
+		TreesitterContextLineNumber = { fg = c.pink, bg = c.bg_dark },
+		TroubleNormal = { fg = c.fg_muted, bg = bg_dark },
+		TroubleNormalNC = { fg = c.fg_muted, bg = bg_dark },
+		TroubleCount = { fg = c.pink, bg = c.bg_highlight },
+		TodoBgTODO = { fg = c.bg, bg = c.info, bold = true },
+		TodoBgFIX = { fg = c.bg, bg = c.error, bold = true },
+		TodoBgHACK = { fg = c.bg, bg = c.warning, bold = true },
+		TodoBgWARN = { fg = c.bg, bg = c.warning, bold = true },
+		TodoBgPERF = { fg = c.bg, bg = c.purple, bold = true },
+		TodoBgNOTE = { fg = c.bg, bg = c.green, bold = true },
+		LazyNormal = { fg = c.fg_muted, bg = options.transparent and "NONE" or c.bg_float },
+		MasonNormal = { fg = c.fg_muted, bg = options.transparent and "NONE" or c.bg_float },
+		CoverageCovered = { fg = c.green },
+		CoverageUncovered = { fg = c.error },
+		CoveragePartial = { fg = c.warning },
+	}
 end
 
-function M.setup()
-	vim.cmd("highlight clear")
-	vim.cmd("syntax reset")
+local function set_terminal_colors()
+	local c = M.palette
+	local terminal = {
+		"#000000",
+		"#CD3131",
+		c.green,
+		"#E5E510",
+		"#2472C8",
+		"#F93778",
+		"#21D3FF",
+		c.fg_bright,
+		"#666666",
+		"#F14C4C",
+		"#23D18B",
+		"#F5F543",
+		"#3B8EEA",
+		"#D670D6",
+		"#29B8DB",
+		"#E5E5E5",
+	}
+
+	for index, color in ipairs(terminal) do
+		vim.g["terminal_color_" .. (index - 1)] = color
+	end
+end
+
+function M.setup(options)
+	options = vim.tbl_deep_extend("force", defaults, options or {})
+
+	vim.cmd.highlight("clear")
+	if vim.fn.exists("syntax_on") == 1 then
+		vim.cmd("syntax reset")
+	end
+
+	vim.o.termguicolors = true
 	vim.o.background = "dark"
 	vim.g.colors_name = "davinci"
 
-	-- Transparência
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = "none", fg = "#9D9AB1" }) -- Transparente com texto claro
-	vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "none", fg = "#7E8392" }) -- Para a status line inativa
+	for name, highlight in pairs(groups(options)) do
+		vim.api.nvim_set_hl(0, name, highlight)
+	end
 
-	apply_highlights()
+	if options.terminal_colors then
+		set_terminal_colors()
+	end
 end
 
 return M

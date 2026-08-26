@@ -121,6 +121,12 @@ else
   sudo pacman -S neovim --noconfirm
 fi
 
+if command -v tree-sitter &> /dev/null; then
+  echo "Tree-sitter CLI is already installed."
+else
+  sudo pacman -S tree-sitter-cli --noconfirm
+fi
+
 if [ -L ~/.config/nvim ]; then
   echo "Removing existing Neovim symlink..."
   rm ~/.config/nvim

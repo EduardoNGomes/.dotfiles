@@ -1,4 +1,5 @@
 require("edu-gomes.remap")
 require("edu-gomes.set")
+vim.cmd.colorscheme("davinci")
 require("edu-gomes.lazy_init")
 require("edu-gomes.macros")

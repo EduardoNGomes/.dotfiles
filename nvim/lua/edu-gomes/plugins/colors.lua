@@ -1,3 +1,5 @@
+-- Tokyo Night is kept as an easy fallback. Uncomment this block to enable it again.
+--[[
 return {
 	-- TokyoNight theme setup
 	{
@@ -36,3 +38,6 @@ return {
 		end,
 	},
 }
+]]
+
+return {}

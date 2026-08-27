@@ -3,7 +3,16 @@ return {
 	version = "*",
 	lazy = false,
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
+		{
+			"nvim-mini/mini.icons",
+			version = false,
+			config = function()
+				require("mini.icons").setup({
+					style = "glyph",
+				})
+				require("mini.icons").mock_nvim_web_devicons()
+			end,
+		},
 	},
 	opts = {
 		sync_root_with_cwd = true, -- Sync the tree's root with the working directory

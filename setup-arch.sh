@@ -363,6 +363,13 @@ if pacman -Q yay-bin &> /dev/null && pacman -Q yay-debug &> /dev/null; then
   sudo pacman -R --noconfirm yay-debug
 fi
 
+# PostgreSQL CLI with auto-completion and syntax highlighting
+if command -v pgcli &> /dev/null; then
+  echo "pgcli is already installed."
+else
+  yay -S pgcli --noconfirm
+fi
+
 # Tokyonight GTK theme — required by GTK_THEME=Tokyonight-Dark (hypr env + gtk-3.0/4.0 settings).
 # Without it, GTK apps (e.g. pavucontrol) fall back to a broken light theme with washed-out text.
 if [ -d /usr/share/themes/Tokyonight-Dark ]; then

@@ -11,6 +11,7 @@
     "modules-right": [
         "mpd",
         "custom/placeholder",
+        "custom/do-not-disturb",
         "network",
         "bluetooth",
         "pulseaudio",
@@ -202,6 +203,12 @@
     "custom/placeholder": {
         "format": " ",
         "tooltip": false
+    },
+    "custom/do-not-disturb": {
+        "exec": "~/.dotfiles/scripts/do-not-disturb.sh status",
+        "return-type": "json",
+        "interval": 2,
+        "on-click": "~/.dotfiles/scripts/do-not-disturb.sh toggle"
     },
     "custom/packages": {
         "exec": "~/.dotfiles/scripts/packages.sh",

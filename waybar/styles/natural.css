@@ -50,6 +50,7 @@ button {
 #custom-media,
 #tray,
 #mpd,
+#custom-do-not-disturb,
 #custom-packages,
 #custom-power {
     color: @snow2;
@@ -99,6 +100,18 @@ button {
 
 #custom-packages {
     color: @purple;
+}
+
+#custom-do-not-disturb {
+    color: @frost2;
+}
+
+#custom-do-not-disturb.enabled {
+    color: @red;
+}
+
+#custom-do-not-disturb.unavailable {
+    color: @polar3;
 }
 
 #cpu,

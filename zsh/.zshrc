@@ -17,7 +17,7 @@ source ~/.dotfiles/zsh/functions.zsh
 
 # ALIAS
 alias nv="nvim"
-alias hconf="nvim ~/.config/hypr/hyprland.conf"
+alias hconf="nvim ~/.config/hypr/hyprland.lua"
 alias kconf="nvim ~/.config/kitty/kitty.conf"
 alias waybar-reload="killall -SIGUSR2 waybar"
 alias wconf="nvim ~/.config/waybar"

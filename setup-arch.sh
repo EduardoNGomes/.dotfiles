@@ -370,13 +370,22 @@ else
   yay -S pgcli --noconfirm
 fi
 
-# Tokyonight GTK theme — required by GTK_THEME=Tokyonight-Dark (hypr env + gtk-3.0/4.0 settings).
-# Without it, GTK apps (e.g. pavucontrol) fall back to a broken light theme with washed-out text.
-if [ -d /usr/share/themes/Tokyonight-Dark ]; then
-  echo "Tokyonight GTK theme is already installed."
-else
-  yay -S tokyonight-gtk-theme-git --noconfirm
+# Tokyonight GTK theme — required by GTK_THEME=Tokyonight-Dark (hypr env +
+# gtk-3.0/4.0 settings). Keep the version bundled with these dotfiles available
+# in GTK's per-user theme lookup path.
+gtk_theme_source="$HOME/.dotfiles/themes/Tokyonight-Dark"
+gtk_theme_dir="${XDG_DATA_HOME:-$HOME/.local/share}/themes"
+gtk_theme_target="$gtk_theme_dir/Tokyonight-Dark"
+mkdir -p "$gtk_theme_dir"
+
+if [ -L "$gtk_theme_target" ]; then
+  rm "$gtk_theme_target"
+elif [ -e "$gtk_theme_target" ]; then
+  mv "$gtk_theme_target" "$gtk_theme_target.backup"
 fi
+
+ln -s "$gtk_theme_source" "$gtk_theme_target"
+echo "Tokyonight GTK theme linked from the dotfiles repository."
 
 # awww
 if command -v awww &> /dev/null; then

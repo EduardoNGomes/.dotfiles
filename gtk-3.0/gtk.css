@@ -64,7 +64,7 @@ selection,
 label:disabled,
 button:disabled,
 entry:disabled {
-  color: @border;
+  color: @muted;
 }
 
 progressbar progress,

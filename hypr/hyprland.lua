@@ -174,7 +174,8 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + A", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen_state({
     internal = 2,
-    client = 2,
+    -- Keep the client out of presentation mode, matching the legacy binding.
+    client = 0,
     action = "toggle",
 }))
 

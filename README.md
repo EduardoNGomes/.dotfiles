@@ -21,7 +21,7 @@ The setup combines a Tokyo Night-inspired desktop, a keyboard-driven Hyprland wo
 | Terminal multiplexer | tmux with vi-style navigation and a custom status line |
 | Input | fcitx5 and a custom `nord-waybar` theme |
 | Utilities | Wallpaper rotation, screenshots, volume controls, DND mode, and Waybar style switching |
-| Extras | Git/Delta, mycli, OpenCode, Vicinae, fonts, wallpapers, and Codex skills |
+| Extras | Git/Delta, mycli, OpenCode, Vicinae, fonts, and wallpapers |
 
 ## Installation
 
@@ -121,7 +121,6 @@ Back up or remove an existing destination before creating a symlink.
 ├── themes/           # Desktop themes
 ├── wallpaper/        # Wallpaper collection
 ├── scripts/          # Desktop helper scripts
-├── skills/           # Personal Codex skills
 ├── setup-arch.sh     # Arch package and symlink setup
 └── setup-ubuntu.sh   # Ubuntu symlink setup
 ```

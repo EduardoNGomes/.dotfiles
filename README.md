@@ -2,6 +2,9 @@
 
 My personal Linux workstation configuration, centered on **Arch Linux + Hyprland** with a smaller set of configs available for Ubuntu.
 
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/b25e31f2-e971-4121-912b-05e936b964ff" />
+
+
 The setup combines a Tokyo Night-inspired desktop, a keyboard-driven Hyprland workflow, a customized Waybar, and a development environment built around Neovim, Zsh, tmux, Kitty, and Alacritty.
 
 > [!WARNING]

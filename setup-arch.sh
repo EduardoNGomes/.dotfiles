@@ -1,5 +1,43 @@
 #!/bin/bash
 
+# Private repositories kept inside the public dotfiles checkout.
+# Override any URL below through the matching environment variable when needed.
+sync_private_repository() {
+  local name="$1"
+  local repository_url="$2"
+  local target="$3"
+
+  if [ -e "$target/.git" ]; then
+    if [ -n "$(git -C "$target" status --porcelain)" ]; then
+      echo "$name has local changes; skipping update."
+    else
+      echo "Updating $name..."
+      git -C "$target" pull --ff-only
+    fi
+  elif [ -e "$target" ]; then
+    echo "Cannot clone $name: $target already exists and is not a Git repository." >&2
+    return 1
+  else
+    echo "Cloning $name..."
+    git clone "$repository_url" "$target"
+  fi
+}
+
+if [ "${SKIP_PRIVATE_REPOS:-0}" != "1" ]; then
+  sync_private_repository \
+    "private Codex skills" \
+    "${DOTFILES_SKILLS_REPOSITORY:-git@github.com:EduardoNGomes/dotfiles-skills.git}" \
+    "$HOME/.dotfiles/skills" || exit 1
+  sync_private_repository \
+    "private wallpapers" \
+    "${DOTFILES_WALLPAPERS_REPOSITORY:-git@github.com:EduardoNGomes/dotfiles-wallpapers.git}" \
+    "$HOME/.dotfiles/wallpaper" || exit 1
+  sync_private_repository \
+    "private profiles" \
+    "${DOTFILES_PROFILES_REPOSITORY:-git@github.com:EduardoNGomes/dotfiles-profiles.git}" \
+    "$HOME/.dotfiles/profile" || exit 1
+fi
+
 # Hyprland
 if [ -L ~/.config/hypr ]; then
   echo "Removing existing Hyprland symlink..."
@@ -147,6 +185,22 @@ elif [ -e ~/.gitconfig ]; then
 fi
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 echo "Symlink created for git."
+
+# Codex skills
+mkdir -p ~/.codex
+if [ -L ~/.codex/skills ]; then
+    echo "Removing existing Codex skills symlink..."
+    rm ~/.codex/skills
+elif [ -e ~/.codex/skills ]; then
+    echo "Backing up existing Codex skills..."
+    mv ~/.codex/skills ~/.codex/skills.backup
+fi
+if [ -d ~/.dotfiles/skills ]; then
+  ln -s ~/.dotfiles/skills ~/.codex/skills
+  echo "Symlink created for Codex skills."
+else
+  echo "Private Codex skills are unavailable; symlink was not created."
+fi
 
 # tmux 
 if command -v tmux &> /dev/null; then

@@ -36,6 +36,20 @@ less setup-arch.sh
 ./setup-arch.sh
 ```
 
+The setup also clones the private `skills`, `wallpaper`, and `profile`
+repositories into the dotfiles directory. Configure GitHub SSH access before
+running it, for example by confirming that `ssh -T git@github.com` succeeds.
+People without access to those repositories can install only the public
+configuration with:
+
+```bash
+SKIP_PRIVATE_REPOS=1 ./setup-arch.sh
+```
+
+The private repository URLs can be customized with
+`DOTFILES_SKILLS_REPOSITORY`, `DOTFILES_WALLPAPERS_REPOSITORY`, and
+`DOTFILES_PROFILES_REPOSITORY`.
+
 The Arch setup script:
 
 - creates symlinks for the desktop, terminal, shell, editor, font, and application configs;
@@ -119,7 +133,9 @@ Back up or remove an existing destination before creating a symlink.
 ├── gtk-3.0, gtk-4.0/ # GTK appearance
 ├── kde/              # Qt/KDE application appearance
 ├── themes/           # Desktop themes
-├── wallpaper/        # Wallpaper collection
+├── skills/           # Private nested repository with Codex skills
+├── wallpaper/        # Private nested wallpaper repository
+├── profile/          # Private nested profile-image repository
 ├── scripts/          # Desktop helper scripts
 ├── setup-arch.sh     # Arch package and symlink setup
 └── setup-ubuntu.sh   # Ubuntu symlink setup

@@ -38,6 +38,7 @@
         "window-rewrite-default": " ",
         "window-rewrite": {
             "class<.*google-chrome.*>": " ",
+            "class<.*brave-browser.*>": " ",
             "class<.*firefox.*>": "󰈹 ",
             "class<.*terminal.*>": " ",
             "class<.*kitty.*>": " ",

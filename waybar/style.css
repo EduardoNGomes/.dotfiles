@@ -182,6 +182,7 @@ button {
 }
 
 #workspaces button {
+    font-family: "Font Awesome 7 Brands", "Hack Nerd Font", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     font-weight: 600;
     min-width: 34px;
     padding: 2px 8pt;

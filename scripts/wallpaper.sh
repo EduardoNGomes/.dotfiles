@@ -3,14 +3,29 @@
 pgrep -f $(basename "$0") | grep -v $$ | xargs kill 2>/dev/null
 
 WALLPAPER_DIR="$HOME/.dotfiles/wallpaper"
-DEFAULT_WALLPAPER="$WALLPAPER_DIR/sanji.webp"
+DEFAULT_WALLPAPER="$WALLPAPER_DIR/isagi-1.png"
 INTERVAL=600
 
 TRANSITION_TYPE="wave"
 TRANSITION_FPS=144
-TRANSITION_DURATION=2
-TRANSITION_ANGLE=270
+TRANSITION_DURATION=3
+TRANSITION_ANGLE=150
 TRANSITION_WAVE="50,25"
+
+function RGBByWallpaper() {
+  wallpaperName="${1##*/}"
+  wallpaperName="${wallpaperName%.*}"
+  
+  if [[ "$wallpaperName" == "kenpachi-manga" ]]; then
+    openrgb --mode static --color FF0000
+  fi
+
+  if [[ "$wallpaperName" == "isagi-1" ]]; then
+    openrgb --mode static --color 0000FF
+  else
+    openrgb --mode static --color 00FF00
+  fi
+}
 
 if ! awww query &> /dev/null; then
     awww-daemon --format xrgb &
@@ -56,7 +71,7 @@ else
 			  awww img "$RANDOM_IMG" \
 				  --transition-type wave \
 				  --transition-fps 144 \
-				  --transition-duration 2 \
+				  --transition-duration 3 \
 				  --transition-angle 270 \
 				  --transition-wave 50,25
 		  fi
@@ -72,3 +87,9 @@ awww img "$wallpaper" \
   --transition-duration "$TRANSITION_DURATION" \
   --transition-angle    "$TRANSITION_ANGLE" \
   --transition-wave     "$TRANSITION_WAVE"
+
+RGBByWallpaper "$wallpaper"
+
+
+
+

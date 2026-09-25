@@ -15,16 +15,17 @@ TRANSITION_WAVE="50,25"
 function RGBByWallpaper() {
   wallpaperName="${1##*/}"
   wallpaperName="${wallpaperName%.*}"
-  
-  if [[ "$wallpaperName" == "kenpachi-manga" ]]; then
-    openrgb --mode static --color FF0000
-  fi
 
-  if [[ "$wallpaperName" == "isagi-1" ]]; then
+  case "$wallpaperName" in
+"kenpachi-manga")
+		openrgb --mode static --color FF0000
+	;;
+"isagi-1")
     openrgb --mode static --color 0000FF
-  else
-    openrgb --mode static --color 00FF00
-  fi
+	;;
+*)
+		openrgb --mode static --color 00FF00
+esac
 }
 
 if ! awww query &> /dev/null; then

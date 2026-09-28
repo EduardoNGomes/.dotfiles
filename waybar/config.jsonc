@@ -24,7 +24,7 @@
         "disk",
         "custom/packages",
         "battery",
-        "clock",
+        "custom/calendar",
         "custom/power"
     ],
     "hyprland/workspaces": {
@@ -79,10 +79,18 @@
         "on-scroll-down": "mpc volume -5",
         "smooth-scrolling-threshold": 1
     },
-    "clock": {
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "󱑂 {:%H:%M %d/%b}",
-        "format-alt": " {:%d/%m/%Y}"
+    "custom/calendar": {
+        "exec": "$HOME/.dotfiles/scripts/waybar-calendar.py",
+        "return-type": "json",
+        "format": "{text}",
+        "interval": 10,
+        "signal": 8,
+        "tooltip": true,
+        "exec-on-event": true,
+        "on-click": "$HOME/.dotfiles/scripts/waybar-calendar.py --toggle-format",
+        "on-click-right": "$HOME/.dotfiles/scripts/waybar-calendar.py --reset",
+        "on-scroll-up": "$HOME/.dotfiles/scripts/waybar-calendar.py --previous",
+        "on-scroll-down": "$HOME/.dotfiles/scripts/waybar-calendar.py --next"
     },
     "network": {
         "format-wifi": "󰖩 {essid}",

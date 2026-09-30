@@ -13,84 +13,106 @@ TRANSITION_ANGLE=150
 TRANSITION_WAVE="50,25"
 
 function RGBByWallpaper() {
-  wallpaperName="${1##*/}"
-  wallpaperName="${wallpaperName%.*}"
+	wallpaperName="${1##*/}"
+	wallpaperName="${wallpaperName%.*}"
 
-  case "$wallpaperName" in
-"kenpachi-manga")
+	case "$wallpaperName" in
+	"kenpachi-manga")
 		openrgb --mode static --color FF0000
-	;;
-"isagi-1")
-    openrgb --mode static --color 0000FF
-	;;
-*)
+		;;
+	"isagi-1")
+		openrgb --mode static --color 0000FF
+		;;
+	*)
 		openrgb --mode static --color 00FF00
-esac
+		;;
+	esac
 }
 
-if ! awww query &> /dev/null; then
-    awww-daemon --format xrgb &
-    sleep 1
+if ! awww query &>/dev/null; then
+	awww-daemon --format xrgb &
+	sleep 1
 fi
 
 default_mode=0
 menu_mode=0
 
 while [[ $# -gt 0 ]]; do
-  case "$1" in
-    -d|--default) default_mode=1; shift ;;
-    -m|--menu)    menu_mode=1;    shift ;;
-    *) break ;;
-  esac
+	case "$1" in
+	-d | --default)
+		default_mode=1
+		shift
+		;;
+	-m | --menu)
+		menu_mode=1
+		shift
+		;;
+	*) break ;;
+	esac
 done
 
-if (( default_mode )); then
-  [[ -f "$DEFAULT_WALLPAPER" ]] \
-    || { echo "Default wallpaper not found: $DEFAULT_WALLPAPER"; exit 1; }
-  wallpaper="$DEFAULT_WALLPAPER"
+if ((default_mode)); then
+	[[ -f "$DEFAULT_WALLPAPER" ]] ||
+		{
+			echo "Default wallpaper not found: $DEFAULT_WALLPAPER"
+			exit 1
+		}
+	wallpaper="$DEFAULT_WALLPAPER"
 
 else
-  mapfile -t images < <(find "$WALLPAPER_DIR" -maxdepth 1 -type f | sort)
-  (( ${#images[@]} > 0 )) \
-    || { echo "No wallpapers found in $WALLPAPER_DIR"; exit 1; }
+	mapfile -t images < <(find "$WALLPAPER_DIR" -maxdepth 1 -type f | sort)
+	((${#images[@]} > 0)) ||
+		{
+			echo "No wallpapers found in $WALLPAPER_DIR"
+			exit 1
+		}
 
-  if (( menu_mode )); then
-    selection=$(
-      printf '%s\n' "${images[@]}" \
-        | vicinae dmenu -p "Select a wallpaper..."
-    )
+	if ((menu_mode)); then
+		selection=$(
+			printf '%s\n' "${images[@]}" |
+				vicinae dmenu -p "Select a wallpaper..."
+		)
 
-    [[ -n "${selection// }" ]] || exit 0
+		[[ -n "${selection// /}" ]] || exit 0
 
-    wallpaper="$selection"
+		wallpaper="$selection"
 
-  else
-	  while true; do
-		  RANDOM_IMG=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+	else
+		motivationWorkoutImageName="motivation-workout.jpg"
+		motivationWorkoutImagePath="$WALLPAPER_DIR/$motivationWorkoutImageName"
 
-		  if [[ -n "$RANDOM_IMG" ]]; then
-			  awww img "$RANDOM_IMG" \
-				  --transition-type wave \
-				  --transition-fps 144 \
-				  --transition-duration 3 \
-				  --transition-angle 270 \
-				  --transition-wave 50,25
-		  fi
+		while true; do
+			if [[ -f "$motivationWorkoutImagePath" ]] && [ "$(date +%H)" -lt 08 ]; then
+				awww img "$motivationWorkoutImagePath" \
+					--transition-type wave \
+					--transition-fps 144 \
+					--transition-duration 3 \
+					--transition-angle 270 \
+					--transition-wave 50,25
 
-		  sleep "$INTERVAL"
-	  done
-  fi
+			else
+				RANDOM_IMG=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+
+				if [[ -n "$RANDOM_IMG" ]]; then
+					awww img "$RANDOM_IMG" \
+						--transition-type wave \
+						--transition-fps 144 \
+						--transition-duration 3 \
+						--transition-angle 270 \
+						--transition-wave 50,25
+				fi
+
+			fi
+			sleep "$INTERVAL"
+		done
+	fi
 fi
 
 awww img "$wallpaper" \
-  --transition-type     "$TRANSITION_TYPE" \
-  --transition-fps      "$TRANSITION_FPS" \
-  --transition-duration "$TRANSITION_DURATION" \
-  --transition-angle    "$TRANSITION_ANGLE" \
-  --transition-wave     "$TRANSITION_WAVE"
+	--transition-type "$TRANSITION_TYPE" \
+	--transition-fps "$TRANSITION_FPS" \
+	--transition-duration "$TRANSITION_DURATION" \
+	--transition-angle "$TRANSITION_ANGLE" \
+	--transition-wave "$TRANSITION_WAVE"
 
 RGBByWallpaper "$wallpaper"
-
-
-
-

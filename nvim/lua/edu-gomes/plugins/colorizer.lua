@@ -1,10 +1,10 @@
 return {
 	{
-		"norcalli/nvim-colorizer.lua",
+		"catgoose/nvim-colorizer.lua",
+		name = "colorizer-catgoose",
 		config = function()
 			require("colorizer").setup({
-				"*", -- Enable for all file types
-				css = { rgb_fn = true }, -- Enable RGB functions for CSS files
+				filetypes = { "*", css = { rgb_fn = true } },
 			})
 		end,
 	},
